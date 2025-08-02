@@ -21,13 +21,13 @@ const getCharacterStyle = (characterName) => {
 // Helper function to get character image URLs
 const getCharacterImage = (characterName) => {
   switch (characterName?.toLowerCase()) {
-    case 'tony soprano': return '/characters/tony-soprano.png';
-    case 'carmela soprano': return '/characters/carmela-soprano.png';
-    case 'christopher moltisanti': return '/characters/christopher-moltisanti.png';
-    case 'paulie gualtieri': return '/characters/paulie-gualtieri.png';
-    case 'silvio dante': return '/characters/silvio-dante.png';
-    case 'dr. jennifer melfi': return '/characters/dr-jennifer-melfi.png';
-    default: return '/characters/default-character.png';
+    case 'tony soprano': return '/characters/tony-soprano.png?v=2';
+    case 'carmela soprano': return '/characters/carmela-soprano.png?v=2';
+    case 'christopher moltisanti': return '/characters/christopher-moltisanti.png?v=2';
+    case 'paulie gualtieri': return '/characters/paulie-gualtieri.png?v=2';
+    case 'silvio dante': return '/characters/silvio-dante.png?v=2';
+    case 'dr. jennifer melfi': return '/characters/dr-jennifer-melfi.png?v=2';
+    default: return '/characters/tony-soprano.png?v=2'; // Fallback to Tony if unknown character
   }
 };
 
@@ -220,7 +220,7 @@ export function HomeComponent() {
             disabled={!!shareStatus && shareStatus !== 'Share Result'}
             aria-label="Share Result"
         >
-            <span role="img" aria-label="share icon">🔗</span> 
+            <span className={styles.farcasterArch}>⌘</span> 
             {shareStatus || 'Share Result'}
         </button>
        )}
@@ -228,7 +228,10 @@ export function HomeComponent() {
       {/* Results Container */} 
       {sopranosData && (
           <div className={styles.resultsContainer}>
-            <h2 className={styles.resultTitle}>You are most like... <span className={`${styles.highlight} ${characterStyle}`}>{primaryCharacter}!</span></h2>
+            <h2 className={styles.resultTitle}>
+              You are most like...<br/>
+              <span className={`${styles.highlight} ${characterStyle}`}>{primaryCharacter}!</span>
+            </h2>
             
             {/* Character Image */}
             <div className={styles.characterImageContainer}>

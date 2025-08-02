@@ -265,6 +265,14 @@
     cursor: pointer;
     transition: background-color 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease;
     display: inline-flex;
+}
+
+.farcasterArch {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-right: 0.5rem;
+    display: inline-block;
+}
     align-items: center;
     gap: 0.5rem;
     box-shadow: 0 4px 12px rgba(255, 107, 53, 0.3);

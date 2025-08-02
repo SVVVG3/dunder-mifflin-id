@@ -1,8 +1,8 @@
 {
   "accountAssociation": {
-    "header": "PLACEHOLDER_HEADER_NEEDS_REAL_SIGNATURE",
-    "payload": "PLACEHOLDER_PAYLOAD_NEEDS_REAL_SIGNATURE",
-    "signature": "PLACEHOLDER_SIGNATURE_NEEDS_REAL_SIGNATURE"
+    "header": "eyJmaWQiOjQ2NjExMSwidHlwZSI6ImN1c3RvZHkiLCJrZXkiOiIweDQ0ZDRjNThlZmNCYjQ0NjM5RDY0NDIwMTc1Q2Y1MTlhQTMxOTFhODYifQ",
+    "payload": "eyJkb21haW4iOiJ3aGljaC1zb3ByYW5vLWFyZS15b3UudmVyY2VsLmFwcCJ9",
+    "signature": "MHhjZTRlMDlmNmJmODEyYTYxYTlkNzI4NDVjMDBkY2U4NDczYTJmZWJiYmM1Zjc0ODkyMjhjZTUwNmU0MjczMjdlNmVmN2JlYzExOTdjZDBhYzllYWNhMDFiYmI4ZGRjZDBjNmQwYjdlNmU5N2Q2ZmQ4ODVlN2ZjYjk5NDU4MDA0MDFi"
   },
   "miniapp": {
     "version": "1",
@@ -15,7 +15,7 @@
     "description": "Analyze your personality and casts to find out which Soprano you most resemble.",
     "primaryCategory": "entertainment",
     "webhookUrl": "https://api.neynar.com/f/app/3a0f9184-d387-428a-ae89-6ea71a2f067f/event",
-    "splashImageUrl": "https://which-soprano-are-you.vercel.app/soprano-icon.png",
+    "splashImageUrl": "https://which-soprano-are-you.vercel.app/soprano-icon.png?v=2",
     "splashBackgroundColor": "#0a0a0a",
     "tagline": "Which Soprano are you?",
     "heroImageUrl": "https://which-soprano-are-you.vercel.app/soprano-embed.png?v=2",

@@ -34,7 +34,7 @@ export async function generateMetadata({ searchParams }) {
             type: "launch_frame",
             name: "Which Soprano are you?",
             url: appUrl,
-            splashImageUrl: `${appUrl}/soprano-icon.png`, // 200x200px custom icon
+            splashImageUrl: `${appUrl}/soprano-icon.png?v=2`, // 200x200px custom icon
             splashBackgroundColor: "#0a0a0a" // Dark theme background
           }
         }
