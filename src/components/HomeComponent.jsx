@@ -220,7 +220,14 @@ export function HomeComponent() {
             disabled={!!shareStatus && shareStatus !== 'Share Result'}
             aria-label="Share Result"
         >
-            <span className={styles.farcasterArch}>⌘</span> 
+            <Image
+              src="/farcaster-arch-icon.png"
+              alt="Farcaster arch icon"
+              width={20}
+              height={20}
+              className={styles.farcasterArch}
+              unoptimized={true}
+            /> 
             {shareStatus || 'Share Result'}
         </button>
        )}

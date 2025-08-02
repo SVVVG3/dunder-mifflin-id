@@ -271,10 +271,10 @@
 }
 
 .farcasterArch {
-    font-size: 1.2em;
-    font-weight: bold;
     margin-right: 0.5rem;
     display: inline-block;
+    filter: brightness(0) invert(1); /* Makes the icon white to match button text */
+    transition: filter 0.2s ease;
 }
 
 .shareButton:hover {
