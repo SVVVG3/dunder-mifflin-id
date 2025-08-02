@@ -5,20 +5,22 @@ import Image from 'next/image';
 import styles from './HomeComponent.module.css';
 import { shareCastIntent } from '@/lib/frame';
 
-// Helper function to get house colors (adjust as needed)
-const getHouseStyle = (houseName) => {
-  switch (houseName?.toLowerCase()) {
-    case 'gryffindor': return styles.gryffindor;
-    case 'slytherin': return styles.slytherin;
-    case 'hufflepuff': return styles.hufflepuff;
-    case 'ravenclaw': return styles.ravenclaw;
+// Helper function to get character colors (adjust as needed)
+const getCharacterStyle = (characterName) => {
+  switch (characterName?.toLowerCase()) {
+    case 'tony soprano': return styles.tonySoprano;
+    case 'carmela soprano': return styles.carmelaSoprano;
+    case 'christopher moltisanti': return styles.christopherMoltisanti;
+    case 'paulie gualtieri': return styles.paulieGualtieri;
+    case 'silvio dante': return styles.silvioDante;
+    case 'dr. jennifer melfi': return styles.drJenniferMelfi;
     default: return '';
   }
 };
 
 export function HomeComponent() {
   const [userData, setUserData] = useState(null);
-  const [hogwartsData, setHogwartsData] = useState(null);
+  const [sopranosData, setSopranosData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const [fid, setFid] = useState(null);
@@ -64,7 +66,7 @@ export function HomeComponent() {
     setIsLoading(true);
     setError(null);
     setUserData(null);
-    setHogwartsData(null);
+    setSopranosData(null);
     setShareStatus('');
     fetch(`/api/user?fid=${fid}`)
       .then(async res => {
@@ -77,9 +79,9 @@ export function HomeComponent() {
       })
       .then(data => {
         // console.log("HomeComponent received analysis data:", data);
-        if (!data.hogwarts) throw new Error("Missing Hogwarts analysis.");
+        if (!data.sopranos) throw new Error("Missing Sopranos analysis.");
         setUserData({ username: data.username, pfp_url: data.pfp_url, display_name: data.display_name });
-        setHogwartsData(data.hogwarts);
+        setSopranosData(data.sopranos);
         setIsLoading(false); 
       })
       .catch(err => {
@@ -90,8 +92,8 @@ export function HomeComponent() {
   }, [fid]);
 
   const handleShareClick = useCallback(async () => {
-    if (!hogwartsData || !fid || !userData) {
-      // console.error('Missing data for sharing:', { hogwartsData, fid, userData });
+    if (!sopranosData || !fid || !userData) {
+      // console.error('Missing data for sharing:', { sopranosData, fid, userData });
       setShareStatus('Error: Missing data');
       setTimeout(() => setShareStatus(''), 3000);
       return;
@@ -106,7 +108,7 @@ export function HomeComponent() {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          house: hogwartsData.primaryHouse,
+          character: sopranosData.primaryCharacter,
           displayName: userData.display_name || userData.username || `FID ${fid}`,
           pfpUrl: userData.pfp_url || '',
           fid: fid,
@@ -130,7 +132,7 @@ export function HomeComponent() {
         throw new Error('Shareable Page URL not received from API.');
       }
 
-      const castText = `I'm a ${hogwartsData.primaryHouse}! What house are you?`;
+      const castText = `I'm most like ${sopranosData.primaryCharacter}! Which Soprano are you?`;
       
       await shareCastIntent(castText, shareablePageUrl);
       
@@ -147,11 +149,11 @@ export function HomeComponent() {
     } finally {
       setTimeout(() => setShareStatus(''), 5000); 
     }
-  }, [hogwartsData, userData, fid]);
+  }, [sopranosData, userData, fid]);
 
-  const primaryHouse = hogwartsData?.primaryHouse;
-  const houseStyle = getHouseStyle(primaryHouse);
-  const otherHouses = hogwartsData?.counterArguments ? Object.keys(hogwartsData.counterArguments) : [];
+  const primaryCharacter = sopranosData?.primaryCharacter;
+  const characterStyle = getCharacterStyle(primaryCharacter);
+  const otherCharacters = sopranosData?.counterArguments ? Object.keys(sopranosData.counterArguments) : [];
 
   // Loading State UI (Show if fid is not set yet OR if isLoading is true during fetch)
   if (!fid || isLoading) {
@@ -159,7 +161,7 @@ export function HomeComponent() {
             <div className={`${styles.container} ${styles.loadingContainer}`}>
                 <div className={styles.spinner}></div>
                 {/* Adjust text based on whether we are waiting for FID or fetching data */} 
-                <p className={styles.loadingText}>{!fid ? "Waiting for frame context..." : "Consulting the Sorting Hat..."}</p>
+                <p className={styles.loadingText}>{!fid ? "Waiting for frame context..." : "Analyzing your personality..."}</p>
             </div>
         );
   }
@@ -168,7 +170,7 @@ export function HomeComponent() {
   if (error) {
         return (
             <div className={styles.container}>
-                 <h2 className={styles.errorTitle}>Sorting Hat Malfunction!</h2>
+                 <h2 className={styles.errorTitle}>Analysis Error!</h2>
                 <p className={styles.errorMessage}>{error}</p>
             </div>
         );
@@ -186,19 +188,19 @@ export function HomeComponent() {
                 alt={`${userData.display_name || userData.username || 'User'}'s profile picture`}
                 width={50} // Smaller PFP
                 height={50}
-                className={`${styles.pfpImageSmall} ${houseStyle}`}
+                className={`${styles.pfpImageSmall} ${characterStyle}`}
                 priority
                 unoptimized={true}
               />
             </div>
         )}
          <h1 className={styles.titleSmall}>
-            Sorting complete for <span className={styles.userNameHighlight}>{userData?.display_name || userData?.username || `FID ${fid}` }</span>!
+            Analysis complete for <span className={styles.userNameHighlight}>{userData?.display_name || userData?.username || `FID ${fid}` }</span>!
         </h1>
       </div>
 
       {/* Share Button - MOVED HERE */} 
-      {hogwartsData && (
+      {sopranosData && (
         <button
             className={styles.shareButton}
             onClick={handleShareClick}
@@ -211,18 +213,18 @@ export function HomeComponent() {
        )}
 
       {/* Results Container */} 
-      {hogwartsData && (
+      {sopranosData && (
           <div className={styles.resultsContainer}>
-            <h2 className={styles.resultTitle}>The Sorting Hat says... <span className={`${styles.highlight} ${houseStyle}`}>{primaryHouse}!</span></h2>
-            {hogwartsData.summary && <p className={styles.summary}>{hogwartsData.summary}</p>}
+            <h2 className={styles.resultTitle}>You are most like... <span className={`${styles.highlight} ${characterStyle}`}>{primaryCharacter}!</span></h2>
+            {sopranosData.summary && <p className={styles.summary}>{sopranosData.summary}</p>}
             
             {/* Details Grid - REORDERED */} 
             <div className={styles.detailsGrid}>
                 {/* Key Traits & Evidence (Now First) */} 
-                {hogwartsData.evidence && hogwartsData.evidence.length > 0 && (
+                {sopranosData.evidence && sopranosData.evidence.length > 0 && (
                   <div className={styles.evidenceContainer}>
                     <h3>Key Traits & Evidence</h3>
-                    {hogwartsData.evidence.map((item, index) => (
+                    {sopranosData.evidence.map((item, index) => (
                       <div key={index} className={styles.evidenceItem}>
                         <h4 className={styles.traitTitle}>{item.trait}</h4>
                         <blockquote>
@@ -235,16 +237,16 @@ export function HomeComponent() {
                     ))}
                   </div>
                 )}
-                {/* House Affinity (Now Second) */} 
-                {hogwartsData.housePercentages && (
+                {/* Character Affinity (Now Second) */} 
+                {sopranosData.characterPercentages && (
                   <div className={styles.percentagesContainer}>
-                    <h3>House Affinity</h3>
+                    <h3>Character Affinity</h3>
                     <ul>
-                      {Object.entries(hogwartsData.housePercentages)
+                      {Object.entries(sopranosData.characterPercentages)
                         .sort(([, a], [, b]) => b - a)
-                        .map(([house, percentage]) => (
-                          <li key={house} className={getHouseStyle(house)}>
-                             {house}: {Math.round(percentage)}%
+                        .map(([character, percentage]) => (
+                          <li key={character} className={getCharacterStyle(character)}>
+                             {character}: {Math.round(percentage)}%
                           </li>
                         ))}
                     </ul>
@@ -253,12 +255,12 @@ export function HomeComponent() {
             </div>
 
              {/* Why Not Section */} 
-             {otherHouses.length > 0 && (
+             {otherCharacters.length > 0 && (
                 <div className={styles.whyNotContainer}>
-                    <h3>Why Not Other Houses?</h3>
-                    {otherHouses.map(house => (
-                        <div key={house} className={styles.whyNotItem}>
-                            <strong className={getHouseStyle(house)}>{house}:</strong> {hogwartsData.counterArguments[house]}
+                    <h3>Why Not Other Characters?</h3>
+                    {otherCharacters.map(character => (
+                        <div key={character} className={styles.whyNotItem}>
+                            <strong className={getCharacterStyle(character)}>{character}:</strong> {sopranosData.counterArguments[character]}
                         </div>
                     ))}
                 </div>

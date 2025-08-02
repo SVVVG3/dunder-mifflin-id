@@ -4,10 +4,10 @@ import { uploadToR2, isCloudflareR2Configured } from '@/lib/r2';
 export async function POST(request) {
   try {
     const body = await request.json();
-    const { house, displayName, pfpUrl, fid } = body;
+    const { character, displayName, pfpUrl, fid } = body;
 
-    if (!house || !displayName || !fid) {
-      return NextResponse.json({ error: 'Missing required parameters: house, displayName, fid' }, { status: 400 });
+    if (!character || !displayName || !fid) {
+      return NextResponse.json({ error: 'Missing required parameters: character, displayName, fid' }, { status: 400 });
     }
 
     const appUrl = process.env.NEXT_PUBLIC_APP_URL;
@@ -26,7 +26,7 @@ export async function POST(request) {
       try {
         // Construct the URL for the OG image generator
         const ogImageUrl = new URL(`${appUrl}/api/og`);
-        ogImageUrl.searchParams.set('house', house);
+        ogImageUrl.searchParams.set('character', character);
         ogImageUrl.searchParams.set('displayName', displayName);
         if (pfpUrl) {
           ogImageUrl.searchParams.set('pfpUrl', pfpUrl);

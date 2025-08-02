@@ -1,7 +1,7 @@
 .page {
-  --gray-rgb: 0, 0, 0;
-  --gray-alpha-200: rgba(var(--gray-rgb), 0.08);
-  --gray-alpha-100: rgba(var(--gray-rgb), 0.05);
+  --gray-rgb: 255, 255, 255;
+  --gray-alpha-200: rgba(var(--gray-rgb), 0.15);
+  --gray-alpha-100: rgba(var(--gray-rgb), 0.08);
 
   display: flex;
   flex-direction: column;
@@ -11,6 +11,8 @@
   padding: 0.5rem;
   gap: 1rem;
   font-family: var(--font-geist-sans);
+  background-color: #0a0a0a;
+  color: #ededed;
 }
 
 .main {

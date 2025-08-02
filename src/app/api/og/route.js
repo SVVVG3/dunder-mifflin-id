@@ -7,7 +7,7 @@ export async function GET(request) {
     const { searchParams } = new URL(request.url);
 
     // Params from query string
-    const house = searchParams.get('house') || 'Your House';
+    const character = searchParams.get('character') || 'Your Character';
     const displayName = searchParams.get('displayName') || 'Anonymous User';
     const pfpUrl = searchParams.get('pfpUrl');
     // const fid = searchParams.get('fid'); // Not directly used in image text but good for context
@@ -35,12 +35,12 @@ export async function GET(request) {
             flexDirection: 'column',
             alignItems: 'center',
             justifyContent: 'center',
-            backgroundColor: '#f0f0f0',
+            backgroundColor: '#1a1a1a',
             fontFamily: '"Arial", sans-serif',
             fontSize: 32,
-            color: 'black',
+            color: 'white',
             padding: '20px',
-            border: '20px solid #4A90E2'
+            border: '20px solid #8B0000'
           }}
         >
           {/* Wrapper for conditional image/placeholder */}
@@ -53,7 +53,7 @@ export async function GET(request) {
                 height={100}
                 style={{
                   borderRadius: '50%',
-                  border: '4px solid #4A90E2'
+                  border: '4px solid #8B0000'
                 }}
               />
             ) : (
@@ -62,8 +62,8 @@ export async function GET(request) {
                   width: 100, 
                   height: 100, 
                   borderRadius: '50%', 
-                  backgroundColor: '#ccc', 
-                  border: '4px solid #4A90E2' 
+                  backgroundColor: '#444', 
+                  border: '4px solid #8B0000' 
                 }}
               />
             )}
@@ -76,18 +76,18 @@ export async function GET(request) {
             marginBottom: '15px',
             fontSize: '40px',
             fontWeight: 'bold',
-            color: '#333'
+            color: '#fff'
           }}>{displayName}</div>
           <div style={{
             display: 'flex',
             justifyContent: 'center',
             textAlign: 'center',
-            fontSize: '50px',
+            fontSize: '42px',
             fontWeight: 'bold',
-            color: '#D95F24',
+            color: '#FF6B35',
             marginBottom: '20px'
           }}>
-            I'm a {house}!
+            I'm most like {character}!
           </div>
 
           <div style={{
@@ -95,10 +95,10 @@ export async function GET(request) {
             justifyContent: 'center',
             textAlign: 'center',
             fontSize: '28px',
-            color: '#555',
+            color: '#ccc',
             marginTop: 'auto'
           }}>
-            Find out your type now!
+            Which Soprano are you?
           </div>
         </div>
       ),

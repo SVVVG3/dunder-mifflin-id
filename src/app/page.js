@@ -22,27 +22,27 @@ export async function generateMetadata({ searchParams }) {
   }
 
   return {
-    title: 'My Page',
-    description: 'Description of my page',
+    title: 'Which Soprano Are You?',
+    description: 'Discover which character from The Sopranos you most resemble based on your personality!',
     other: {
-      'fc:frame': JSON.stringify({
-        version: "next", // Exactly as requested
-        imageUrl: dynamicImageUrl, // Dynamically set image URL
+      'fc:miniapp': JSON.stringify({
+        version: "1", // Mini App version format
+        imageUrl: dynamicImageUrl, // 3:2 aspect ratio image
         button: {
-          title: "Try now!", // Exactly as requested
+          title: "Which Soprano are you?", // Max 32 characters
           action: {
-            type: "launch_frame", // Exactly as requested
-            name: "your-frame-name", // Placeholder - PLEASE UPDATE THIS
-            url: appUrl, // Uses the defined appUrl (NEXT_PUBLIC_APP_URL or default)
-            splashImageUrl: "https://placehold.co/200x200/blue/white/png?text=Splash+Image", // Placeholder - PLEASE UPDATE
-            splashBackgroundColor: "#ffffff" // Placeholder - PLEASE UPDATE
+            type: "launch_frame",
+            name: "Sopranos Personality Quiz",
+            url: appUrl,
+            splashImageUrl: `${appUrl}/api/splash`, // 200x200px generated image
+            splashBackgroundColor: "#0a0a0a" // Dark theme background
           }
         }
       })
     },
     openGraph: {
-      title: 'My Page - Check out my result!',
-      description: 'I found out my result, check it out!',
+      title: 'Which Soprano Are You? - Check out my result!',
+      description: 'I found out which Soprano character I am most like!',
       images: [
         {
           url: dynamicImageUrl, // OG image also uses the dynamic image
@@ -54,8 +54,8 @@ export async function generateMetadata({ searchParams }) {
     },
     twitter: {
       card: 'summary_large_image',
-      title: 'My Page - Check out my result!',
-      description: 'I found out my result, check it out!',
+      title: 'Which Soprano Are You? - Check out my result!',
+      description: 'I found out which Soprano character I am most like!',
       images: [dynamicImageUrl], // Twitter image also uses the dynamic image
     },
   };

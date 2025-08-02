@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { getUserDataFromNeynar, getRecentCastTexts } from '@/lib/neynar';
-import { analyzeHogwartsHouse } from '@/lib/gemini';
+import { analyzeSopranosCharacter } from '@/lib/gemini';
 
 // Set runtime to edge
 export const runtime = 'edge';
@@ -41,14 +41,14 @@ export async function GET(request) {
     const bio = userData.profile?.bio?.text || null;
 
     // Analyze using Gemini
-    const hogwartsAnalysis = await analyzeHogwartsHouse(bio, castTexts);
+    const sopranosAnalysis = await analyzeSopranosCharacter(bio, castTexts);
 
-    if (!hogwartsAnalysis) {
-      console.error(`Failed to get Hogwarts analysis from Gemini for FID: ${fid}`);
+    if (!sopranosAnalysis) {
+      console.error(`Failed to get Sopranos analysis from Gemini for FID: ${fid}`);
       return NextResponse.json({ error: 'Failed to analyze user profile' }, { status: 500 });
     }
 
-    console.log(`Successfully received Hogwarts analysis for FID: ${fid}. Primary House: ${hogwartsAnalysis.primaryHouse}`);
+    console.log(`Successfully received Sopranos analysis for FID: ${fid}. Primary Character: ${sopranosAnalysis.primaryCharacter}`);
 
     // Combine results
     const responseData = {
@@ -56,8 +56,8 @@ export async function GET(request) {
       username: userData.username,
       pfp_url: userData.pfp_url,
       display_name: userData.display_name,
-      // Hogwarts analysis
-      hogwarts: hogwartsAnalysis, // Nest the analysis object
+      // Sopranos analysis
+      sopranos: sopranosAnalysis, // Nest the analysis object
     };
 
     return NextResponse.json(responseData);
