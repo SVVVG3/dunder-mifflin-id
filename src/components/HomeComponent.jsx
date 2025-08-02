@@ -287,7 +287,18 @@ export function HomeComponent() {
                     <h3>Why Not Other Characters?</h3>
                     {otherCharacters.map(character => (
                         <div key={character} className={styles.whyNotItem}>
-                            <strong className={getCharacterStyle(character)}>{character}:</strong> {sopranosData.counterArguments[character]}
+                            <div className={styles.whyNotHeader}>
+                                <Image
+                                    src={getCharacterImage(character)}
+                                    alt={`${character} character portrait`}
+                                    width={60}
+                                    height={60}
+                                    className={`${styles.whyNotCharacterImage} ${getCharacterStyle(character)}`}
+                                    unoptimized={true}
+                                />
+                                <strong className={getCharacterStyle(character)}>{character}:</strong>
+                            </div>
+                            <p className={styles.whyNotExplanation}>{sopranosData.counterArguments[character]}</p>
                         </div>
                     ))}
                 </div>

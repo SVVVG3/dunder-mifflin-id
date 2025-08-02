@@ -3,7 +3,7 @@ import styles from "./page.module.css";
 import { HomeComponent } from '@/components/HomeComponent';
 
 export async function generateMetadata({ searchParams }) {
-  const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000';
+  const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://which-soprano-are-you.vercel.app';
   const r2PublicUrl = process.env.R2_PUBLIC_URL;
   const R2_FOLDER_PREFIX = 'what-x-are-you/'; // Define the folder prefix
 
