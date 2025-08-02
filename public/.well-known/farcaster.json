@@ -4,21 +4,21 @@
     "payload": "PLACEHOLDER_PAYLOAD_NEEDS_REAL_SIGNATURE",
     "signature": "PLACEHOLDER_SIGNATURE_NEEDS_REAL_SIGNATURE"
   },
-  "frame": {
+  "miniapp": {
     "version": "1",
     "name": "Which Soprano Are You?",
-    "iconUrl": "http://localhost:3001/api/splash",
-    "homeUrl": "http://localhost:3001",
-    "imageUrl": "http://localhost:3001/api/og?character=Tony%20Soprano&displayName=Preview&fid=123",
+    "iconUrl": "https://which-soprano-are-you.vercel.app/soprano-icon.png",
+    "homeUrl": "https://which-soprano-are-you.vercel.app",
+    "imageUrl": "https://which-soprano-are-you.vercel.app/soprano-embed.png",
     "buttonTitle": "Give me the Gabagool",
     "subtitle": "Which Soprano are you?",
     "description": "Analyze your personality and casts to find out which Soprano you most resemble.",
     "primaryCategory": "entertainment",
     "webhookUrl": "https://api.neynar.com/f/app/3a0f9184-d387-428a-ae89-6ea71a2f067f/event",
-    "splashImageUrl": "http://localhost:3001/api/splash",
+    "splashImageUrl": "https://which-soprano-are-you.vercel.app/soprano-icon.png",
     "splashBackgroundColor": "#0a0a0a",
     "tagline": "Which Soprano are you?",
-    "heroImageUrl": "http://localhost:3001/api/og?character=Tony%20Soprano&displayName=Hero&fid=123",
+    "heroImageUrl": "https://which-soprano-are-you.vercel.app/api/og?character=Tony%20Soprano&displayName=Hero&fid=123",
     "tags": [
       "personality",
       "quiz",
@@ -26,9 +26,9 @@
       "entertainment",
       "ai-analysis"
     ],
-    "castShareUrl": "http://localhost:3001",
+    "castShareUrl": "https://which-soprano-are-you.vercel.app",
     "ogTitle": "Which Soprano Are You?",
     "ogDescription": "Analyze your personality and casts to find out which Soprano you most resemble.",
-    "ogImageUrl": "http://localhost:3001/api/og?character=Tony%20Soprano&displayName=OG&fid=123"
+    "ogImageUrl": "https://which-soprano-are-you.vercel.app/api/og?character=Tony%20Soprano&displayName=OG&fid=123"
   }
 }
