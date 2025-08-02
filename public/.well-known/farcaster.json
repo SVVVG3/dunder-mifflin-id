@@ -5,7 +5,7 @@
     "signature": "MHhjZTRlMDlmNmJmODEyYTYxYTlkNzI4NDVjMDBkY2U4NDczYTJmZWJiYmM1Zjc0ODkyMjhjZTUwNmU0MjczMjdlNmVmN2JlYzExOTdjZDBhYzllYWNhMDFiYmI4ZGRjZDBjNmQwYjdlNmU5N2Q2ZmQ4ODVlN2ZjYjk5NDU4MDA0MDFi"
   },
   "miniapp": {
-    "version": "1",
+    "version": "next",
     "name": "Which Soprano Are You?",
     "iconUrl": "https://which-soprano-are-you.vercel.app/soprano-icon.png",
     "homeUrl": "https://which-soprano-are-you.vercel.app",

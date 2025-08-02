@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.804.0",
-    "@farcaster/frame-sdk": "^0.0.37",
+    "@farcaster/miniapp-sdk": "latest",
     "@google/generative-ai": "^0.24.1",
     "@vercel/og": "^0.6.8",
     "next": "15.3.1",

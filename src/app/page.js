@@ -25,8 +25,8 @@ export async function generateMetadata({ searchParams }) {
     title: 'Which Soprano Are You?',
     description: 'Discover which character from The Sopranos you most resemble based on your personality!',
     other: {
-      'fc:miniapp': JSON.stringify({
-        version: "1", // Mini App version format
+      'fc:frame': JSON.stringify({
+        version: "next", // Updated Mini App version format
         imageUrl: dynamicImageUrl, // 3:2 aspect ratio image
         button: {
           title: "Give me the Gabagool", // Max 32 characters

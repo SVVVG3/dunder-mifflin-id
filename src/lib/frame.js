@@ -1,13 +1,13 @@
-import * as frame from '@farcaster/frame-sdk'
+import { sdk } from '@farcaster/miniapp-sdk'
 
 export async function initializeFrame() {
   try {
     // Always call ready() first to remove splash screen - required for Mini Apps
-    await frame.sdk.actions.ready();
+    await sdk.actions.ready();
     console.log('Mini App ready signal sent.');
     
     // Then try to get context
-    const context = await frame.sdk.context;
+    const context = await sdk.context;
 
     if (!context || !context.user) {
       console.log('Not in frame context - running as standalone');
@@ -36,7 +36,7 @@ export async function initializeFrame() {
     console.error('Error initializing frame/miniapp:', error);
     // Still try to call ready even if context fails
     try {
-      await frame.sdk.actions.ready();
+      await sdk.actions.ready();
       console.log('Fallback ready signal sent.');
     } catch (readyError) {
       console.error('Error signaling ready:', readyError);
@@ -51,17 +51,26 @@ export async function shareCastIntent(castText, embedUrl) {
   }
 
   try {
-    const finalComposeUrl = `https://warpcast.com/~/compose?text=${encodeURIComponent(castText)}&embeds[]=${encodeURIComponent(embedUrl)}`;
-    
-    // Ensure the SDK is available and has the necessary methods
-    if (!frame || !frame.sdk || !frame.sdk.actions || !frame.sdk.actions.openUrl) {
-        throw new Error('Farcaster SDK or actions.openUrl not available.');
-    }
+    // Use the newer composeCast method for better integration
+    if (sdk && sdk.actions && sdk.actions.composeCast) {
+      await sdk.actions.composeCast({
+        text: castText,
+        embeds: [embedUrl]
+      });
+      console.log('Successfully opened compose cast with new SDK method');
+    } else {
+      // Fallback to URL method if composeCast is not available
+      const finalComposeUrl = `https://warpcast.com/~/compose?text=${encodeURIComponent(castText)}&embeds[]=${encodeURIComponent(embedUrl)}`;
+      
+      if (!sdk || !sdk.actions || !sdk.actions.openUrl) {
+          throw new Error('Farcaster SDK or actions.openUrl not available.');
+      }
 
-    await frame.sdk.actions.openUrl({ url: finalComposeUrl });
-    // console.log('Successfully opened Warpcast compose intent:', finalComposeUrl);
+      await sdk.actions.openUrl({ url: finalComposeUrl });
+      console.log('Successfully opened Warpcast compose intent via URL:', finalComposeUrl);
+    }
   } catch (error) {
-    console.error('Error in shareCastIntent opening URL:', error);
+    console.error('Error in shareCastIntent:', error);
     // Re-throw the error so the calling component can handle it if needed
     throw error; 
   }
