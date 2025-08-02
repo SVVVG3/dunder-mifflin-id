@@ -9,7 +9,7 @@
     "name": "Which Soprano Are You?",
     "iconUrl": "https://which-soprano-are-you.vercel.app/soprano-icon.png",
     "homeUrl": "https://which-soprano-are-you.vercel.app",
-    "imageUrl": "https://which-soprano-are-you.vercel.app/soprano-embed.png",
+    "imageUrl": "https://which-soprano-are-you.vercel.app/soprano-embed.png?v=2",
     "buttonTitle": "Give me the Gabagool",
     "subtitle": "Which Soprano are you?",
     "description": "Analyze your personality and casts to find out which Soprano you most resemble.",
@@ -18,7 +18,7 @@
     "splashImageUrl": "https://which-soprano-are-you.vercel.app/soprano-icon.png",
     "splashBackgroundColor": "#0a0a0a",
     "tagline": "Which Soprano are you?",
-    "heroImageUrl": "https://which-soprano-are-you.vercel.app/soprano-embed.png",
+    "heroImageUrl": "https://which-soprano-are-you.vercel.app/soprano-embed.png?v=2",
     "tags": [
       "personality",
       "quiz",
@@ -29,6 +29,6 @@
     "castShareUrl": "https://which-soprano-are-you.vercel.app",
     "ogTitle": "Which Soprano Are You?",
     "ogDescription": "Analyze your personality and casts to find out which Soprano you most resemble.",
-    "ogImageUrl": "https://which-soprano-are-you.vercel.app/soprano-embed.png"
+    "ogImageUrl": "https://which-soprano-are-you.vercel.app/soprano-embed.png?v=2"
   }
 }
