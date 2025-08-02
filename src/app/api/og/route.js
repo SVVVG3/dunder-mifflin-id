@@ -43,30 +43,24 @@ export async function GET(request) {
             border: '20px solid #8B0000'
           }}
         >
-          {/* Wrapper for conditional image/placeholder */}
+          {/* Character Image */}
           <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginBottom: '20px' }}>
-            {validPfpUrl ? (
-              <img
-                src={validPfpUrl}
-                alt="User PFP"
-                width={100}
-                height={100}
-                style={{
-                  borderRadius: '50%',
-                  border: '4px solid #8B0000'
-                }}
-              />
-            ) : (
-              <div 
-                style={{ 
-                  width: 100, 
-                  height: 100, 
-                  borderRadius: '50%', 
-                  backgroundColor: '#444', 
-                  border: '4px solid #8B0000' 
-                }}
-              />
-            )}
+            <div 
+              style={{ 
+                width: 120, 
+                height: 120, 
+                borderRadius: '12px',
+                backgroundColor: '#333',
+                border: '4px solid #8B0000',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                fontSize: '48px',
+                color: '#FF6B35'
+              }}
+            >
+              {character.split(' ')[0][0]}{character.split(' ')[1] ? character.split(' ')[1][0] : ''}
+            </div>
           </div>
           
           <div style={{

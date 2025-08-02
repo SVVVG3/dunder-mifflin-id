@@ -18,6 +18,19 @@ const getCharacterStyle = (characterName) => {
   }
 };
 
+// Helper function to get character image URLs
+const getCharacterImage = (characterName) => {
+  switch (characterName?.toLowerCase()) {
+    case 'tony soprano': return '/characters/tony-soprano.png';
+    case 'carmela soprano': return '/characters/carmela-soprano.png';
+    case 'christopher moltisanti': return '/characters/christopher-moltisanti.png';
+    case 'paulie gualtieri': return '/characters/paulie-gualtieri.png';
+    case 'silvio dante': return '/characters/silvio-dante.png';
+    case 'dr. jennifer melfi': return '/characters/dr-jennifer-melfi.png';
+    default: return '/characters/default-character.png';
+  }
+};
+
 export function HomeComponent() {
   const [userData, setUserData] = useState(null);
   const [sopranosData, setSopranosData] = useState(null);
@@ -216,6 +229,20 @@ export function HomeComponent() {
       {sopranosData && (
           <div className={styles.resultsContainer}>
             <h2 className={styles.resultTitle}>You are most like... <span className={`${styles.highlight} ${characterStyle}`}>{primaryCharacter}!</span></h2>
+            
+            {/* Character Image */}
+            <div className={styles.characterImageContainer}>
+              <Image
+                src={getCharacterImage(primaryCharacter)}
+                alt={`${primaryCharacter} character portrait`}
+                width={200}
+                height={200}
+                className={`${styles.characterImage} ${characterStyle}`}
+                priority
+                unoptimized={true}
+              />
+            </div>
+            
             {sopranosData.summary && <p className={styles.summary}>{sopranosData.summary}</p>}
             
             {/* Details Grid - REORDERED */} 
