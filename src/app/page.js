@@ -7,7 +7,7 @@ export async function generateMetadata({ searchParams }) {
   const r2PublicUrl = process.env.R2_PUBLIC_URL;
   const R2_FOLDER_PREFIX = 'what-x-are-you/'; // Define the folder prefix
 
-  let dynamicImageUrl = "https://placehold.co/600x400/orange/white/png?text=Preview+Image"; // Default
+  let dynamicImageUrl = `${appUrl}/soprano-embed.png?v=2`; // Default to custom embed image
   
   const shareImageFileNameOnly = (await searchParams).image; 
 
@@ -29,12 +29,12 @@ export async function generateMetadata({ searchParams }) {
         version: "1", // Mini App version format
         imageUrl: dynamicImageUrl, // 3:2 aspect ratio image
         button: {
-          title: "Which Soprano are you?", // Max 32 characters
+          title: "Give me the Gabagool", // Max 32 characters
           action: {
             type: "launch_frame",
-            name: "Sopranos Personality Quiz",
+            name: "Which Soprano are you?",
             url: appUrl,
-            splashImageUrl: `${appUrl}/api/splash`, // 200x200px generated image
+            splashImageUrl: `${appUrl}/soprano-icon.png`, // 200x200px custom icon
             splashBackgroundColor: "#0a0a0a" // Dark theme background
           }
         }
