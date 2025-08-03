@@ -15,20 +15,20 @@ const sopranosSchema = {
     primaryCharacter: {
       type: SchemaType.STRING,
       description: "The Sopranos character that best represents the user based on their traits.",
-      enum: ["Tony Soprano", "Carmela Soprano", "Christopher Moltisanti", "Paulie Gualtieri", "Silvio Dante", "Dr. Jennifer Melfi"],
+      enum: ["Dr. Jennifer Melfi", "Silvio Dante", "Carmela Soprano", "Christopher Moltisanti", "Paulie Gualtieri", "Tony Soprano"],
     },
     characterPercentages: {
       type: SchemaType.OBJECT,
       description: "An estimated percentage affinity for each Sopranos character (0-100). These represent affinity and do not need to sum to 100.",
       properties: {
-        "Tony Soprano": { type: SchemaType.NUMBER, description: "Percentage affinity for Tony Soprano (leadership, complexity, family loyalty, ruthlessness)." },
+        "Dr. Jennifer Melfi": { type: SchemaType.NUMBER, description: "Percentage affinity for Dr. Melfi (analytical nature, professionalism, ethical principles, wisdom)." },
+        "Silvio Dante": { type: SchemaType.NUMBER, description: "Percentage affinity for Silvio Dante (calm demeanor, business acumen, reliability, strategic thinking)." },
         "Carmela Soprano": { type: SchemaType.NUMBER, description: "Percentage affinity for Carmela Soprano (family devotion, moral conflict, materialism, strength)." },
         "Christopher Moltisanti": { type: SchemaType.NUMBER, description: "Percentage affinity for Christopher Moltisanti (ambition, creativity, impulsiveness, loyalty)." },
         "Paulie Gualtieri": { type: SchemaType.NUMBER, description: "Percentage affinity for Paulie Gualtieri (superstition, old-school values, humor, loyalty)." },
-        "Silvio Dante": { type: SchemaType.NUMBER, description: "Percentage affinity for Silvio Dante (calm demeanor, business acumen, reliability, strategic thinking)." },
-        "Dr. Jennifer Melfi": { type: SchemaType.NUMBER, description: "Percentage affinity for Dr. Melfi (analytical nature, professionalism, ethical principles, wisdom)." },
+        "Tony Soprano": { type: SchemaType.NUMBER, description: "Percentage affinity for Tony Soprano (leadership, complexity, family loyalty, ruthlessness)." },
       },
-      required: ["Tony Soprano", "Carmela Soprano", "Christopher Moltisanti", "Paulie Gualtieri", "Silvio Dante", "Dr. Jennifer Melfi"],
+      required: ["Dr. Jennifer Melfi", "Silvio Dante", "Carmela Soprano", "Christopher Moltisanti", "Paulie Gualtieri", "Tony Soprano"],
     },
     summary: {
         type: SchemaType.STRING,
@@ -72,12 +72,12 @@ const sopranosSchema = {
         type: SchemaType.OBJECT,
         description: "Brief explanations (1-2 sentences each) for why the user doesn\'t primarily align with the *other* five characters, written directly to the user. Keys should be the character names.",
         properties: {
-            "Tony Soprano": { type: SchemaType.STRING, description: "Why not primarily Tony Soprano? Focus on contrasting traits.", maxLength: 150 },
+            "Dr. Jennifer Melfi": { type: SchemaType.STRING, description: "Why not primarily Dr. Jennifer Melfi? Focus on contrasting traits.", maxLength: 150 },
+            "Silvio Dante": { type: SchemaType.STRING, description: "Why not primarily Silvio Dante? Focus on contrasting traits.", maxLength: 150 },
             "Carmela Soprano": { type: SchemaType.STRING, description: "Why not primarily Carmela Soprano? Focus on contrasting traits.", maxLength: 150 },
             "Christopher Moltisanti": { type: SchemaType.STRING, description: "Why not primarily Christopher Moltisanti? Focus on contrasting traits.", maxLength: 150 },
             "Paulie Gualtieri": { type: SchemaType.STRING, description: "Why not primarily Paulie Gualtieri? Focus on contrasting traits.", maxLength: 150 },
-            "Silvio Dante": { type: SchemaType.STRING, description: "Why not primarily Silvio Dante? Focus on contrasting traits.", maxLength: 150 },
-            "Dr. Jennifer Melfi": { type: SchemaType.STRING, description: "Why not primarily Dr. Jennifer Melfi? Focus on contrasting traits.", maxLength: 150 },
+            "Tony Soprano": { type: SchemaType.STRING, description: "Why not primarily Tony Soprano? Focus on contrasting traits.", maxLength: 150 },
         },
     },
   },
@@ -113,14 +113,14 @@ export async function analyzeSopranosCharacter(bio, casts) {
     },
   });
 
-  const prompt = `Analyze this Farcaster user's bio and recent casts to determine which Sopranos character they most resemble. Assign a primary character and percentage affinities (0-100) for all six characters based on these character traits:
+  const prompt = `Analyze this Farcaster user's bio and recent casts to determine which Sopranos character they most resemble. **IMPORTANT: Consider ALL characters equally - do not default to Tony Soprano. Each character is equally likely.** Assign a primary character and percentage affinities (0-100) for all six characters based on these character traits:
 
-*   **Tony Soprano:** Complex leadership, family loyalty mixed with ruthlessness, vulnerability beneath a tough exterior, therapy and self-reflection, struggling with moral conflicts, protective instincts, charisma, strategic thinking with emotional outbursts.
-*   **Carmela Soprano:** Strong family devotion, moral conflict about lifestyle, materialism and status consciousness, inner strength and resilience, religious faith, loyalty despite personal cost, sophisticated taste, protective of children.
-*   **Christopher Moltisanti:** Ambition and desire for respect, creative/artistic aspirations, impulsiveness and emotional volatility, loyalty to mentors, addiction struggles, violence mixed with sensitivity, dreams of bigger things, insecurity.
-*   **Paulie Gualtieri:** Superstitious nature, old-school values and traditions, humor and storytelling, fierce loyalty to the family, paranoia, simple pleasures, directness, survivor instinct.
-*   **Silvio Dante:** Calm and level-headed demeanor, excellent business acumen, reliability and steadiness, strategic thinking, diplomatic approach, loyalty without drama, practical wisdom, behind-the-scenes influence.
-*   **Dr. Jennifer Melfi:** Analytical and intellectual nature, professional ethics and boundaries, wisdom and insight, calm under pressure, principled decision-making, therapeutic mindset, academic perspective, moral clarity.
+*   **Dr. Jennifer Melfi:** Analytical and intellectual nature, professional ethics and boundaries, wisdom and insight, calm under pressure, principled decision-making, therapeutic mindset, academic perspective, moral clarity, helping others through analysis.
+*   **Silvio Dante:** Calm and level-headed demeanor, excellent business acumen, reliability and steadiness, strategic thinking, diplomatic approach, loyalty without drama, practical wisdom, behind-the-scenes influence, measured responses.
+*   **Carmela Soprano:** Strong family devotion, moral conflict about lifestyle, materialism and status consciousness, inner strength and resilience, religious faith, loyalty despite personal cost, sophisticated taste, protective of children, complex moral reasoning.
+*   **Christopher Moltisanti:** Ambition and desire for respect, creative/artistic aspirations, impulsiveness and emotional volatility, loyalty to mentors, addiction struggles, violence mixed with sensitivity, dreams of bigger things, insecurity, artistic expression.
+*   **Paulie Gualtieri:** Superstitious nature, old-school values and traditions, humor and storytelling, fierce loyalty to the family, paranoia, simple pleasures, directness, survivor instinct, colorful anecdotes, traditional mindset.
+*   **Tony Soprano:** Mob boss leadership with therapy sessions, panic attacks and anxiety, ruthless business decisions mixed with emotional vulnerability, compartmentalization of violence and family life, therapy discussions, anger management issues, complex relationship with power and violence.
 
 **Input Data:**
 Bio: ${bio || 'No bio provided.'}
@@ -128,11 +128,12 @@ Recent Casts (max ${casts.length > 50 ? 50 : casts.length}):
 ${casts.slice(0, 50).join('\n---\n')} ${casts.length > 50 ? '\n[... additional casts truncated]' : ''}
 
 **Analysis Instructions:**
-1.  **Percentages:** Estimate affinity for EACH character (0-100%). Do NOT need to sum to 100.
-2.  **Primary Character:** Determine the single BEST fit from the six Sopranos characters.
-3.  **Summary (Analyst Voice - Direct):** Write a 2-4 sentence summary addressing the user directly with "You" and "Your". Start with observation (e.g., "Looking at your posts...", "Based on your communication style..."), specifically mention 1-2 key traits *you observed* in *their* casts/bio that strongly align with the chosen character, and *then* make the character assignment (e.g., "Your [specific trait] and [specific behavior] most closely align with [Primary Character]"). Be insightful and specific.
-4.  **Evidence:** Provide EXACTLY 3 pieces of evidence (trait, 1-2 short quotes max 10 words, 1 sentence explanation TO the user).
-5.  **Counter Arguments:** For the FIVE characters that are *NOT* the primary character, provide a brief (1-2 sentence) explanation TO THE USER about why they don't fit *primarily* into that character archetype, focusing on contrasting traits.
+1.  **NO DEFAULT BIAS:** Do NOT default to Tony Soprano. Each character is equally likely. Consider the user's specific traits carefully.
+2.  **Percentages:** Estimate affinity for EACH character (0-100%). Do NOT need to sum to 100. Be realistic - most people will have low percentages for characters that don't match.
+3.  **Primary Character:** Determine the single BEST fit from the six Sopranos characters based on SPECIFIC traits, not general ones.
+4.  **Summary (Analyst Voice - Direct):** Write a 2-4 sentence summary addressing the user directly with "You" and "Your". Start with observation (e.g., "Looking at your posts...", "Based on your communication style..."), specifically mention 1-2 key traits *you observed* in *their* casts/bio that strongly align with the chosen character, and *then* make the character assignment (e.g., "Your [specific trait] and [specific behavior] most closely align with [Primary Character]"). Be insightful and specific.
+5.  **Evidence:** Provide EXACTLY 3 pieces of evidence (trait, 1-2 short quotes max 10 words, 1 sentence explanation TO the user).
+6.  **Counter Arguments:** For the FIVE characters that are *NOT* the primary character, provide a brief (1-2 sentence) explanation TO THE USER about why they don't fit *primarily* into that character archetype, focusing on contrasting traits.
 
 **IMPORTANT FORMATTING & STYLE:**
 *   Adhere STRICTLY to the JSON schema.
