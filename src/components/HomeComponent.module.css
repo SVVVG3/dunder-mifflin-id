@@ -276,7 +276,7 @@
     font-size: 1rem;
     font-weight: 600;
     color: #ffffff;
-    background: linear-gradient(135deg, #012f85 0%, #0056b3 100%);
+    background: linear-gradient(135deg, #7c65c1 0%, #9b7ed4 100%);
     border: none;
     border-radius: 12px;
     cursor: pointer;
@@ -284,7 +284,7 @@
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    box-shadow: 0 4px 16px rgba(1, 47, 133, 0.3);
+    box-shadow: 0 4px 16px rgba(124, 101, 193, 0.3);
     letter-spacing: 0.5px;
 }
 
@@ -297,8 +297,8 @@
 
 .shareButton:hover {
     transform: translateY(-2px);
-    background: linear-gradient(135deg, #0056b3 0%, #007bff 100%);
-    box-shadow: 0 6px 20px rgba(1, 47, 133, 0.4);
+    background: linear-gradient(135deg, #8b73d4 0%, #a688db 100%);
+    box-shadow: 0 6px 20px rgba(124, 101, 193, 0.4);
 }
 
 .shareButton:active {

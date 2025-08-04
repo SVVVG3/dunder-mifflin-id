@@ -592,8 +592,8 @@ All I did was take a quiz & I got hired 🤷‍♂️`;
         <button
             className={styles.shareButton}
             onClick={handleShareClick}
-            disabled={!!shareStatus && shareStatus !== 'Share Result'}
-            aria-label="Share Result"
+            disabled={!!shareStatus && shareStatus !== 'Share my ID'}
+            aria-label="Share my ID"
         >
             <Image
               src="/farcaster-arch-icon.png"
@@ -603,7 +603,7 @@ All I did was take a quiz & I got hired 🤷‍♂️`;
               className={styles.farcasterArch}
               unoptimized={true}
             /> 
-            {shareStatus || 'Share Result'}
+            {shareStatus || 'Share my ID'}
         </button>
        )}
 

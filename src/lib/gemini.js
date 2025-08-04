@@ -178,11 +178,13 @@ ${casts.slice(0, 50).join('\n---\n')} ${casts.length > 50 ? '\n[... additional c
 *   Base analysis only on provided text.
 *   Focus on behavioral patterns, communication style, values, and personality traits that match the Office characters.
 
-**CRITICAL CONSISTENCY CHECK:**
-*   The primaryCharacter MUST have the highest percentage in characterPercentages (70-95%)
+**CRITICAL CONSISTENCY CHECK - THIS IS MANDATORY:**
+*   The primaryCharacter MUST ALWAYS have the HIGHEST percentage in characterPercentages (75-95%)
+*   EXAMPLE: If primaryCharacter = "Darryl Philbin", then characterPercentages["Darryl Philbin"] MUST be 80-95%
+*   ALL other characters MUST have lower percentages than the primary (max 70% for others)
 *   This prevents user confusion where their "mentor" has a lower score than someone else
-*   If you choose Darryl as primary, he should have 80%+ while others have lower scores
-*   The percentages should logically support your primary character choice
+*   DOUBLE-CHECK: Ensure primaryCharacter percentage > all other character percentages
+*   The AI will be considered FAILED if primary character doesn't have the highest score
 
 Please provide the analysis in the specified JSON format.`;
 
@@ -214,8 +216,35 @@ Please provide the analysis in the specified JSON format.`;
             throw new Error("Invalid structure in Gemini response.");
         }
 
-        // Filter counterArguments to remove the entry for the primary character
+        // CRITICAL: Enforce consistency - primaryCharacter MUST have highest percentage
         const primary = parsedResponse.primaryCharacter;
+        const primaryPercentage = parsedResponse.characterPercentages[primary];
+        
+        // Check if any other character has a higher percentage
+        let hasInconsistency = false;
+        let maxOtherPercentage = 0;
+        for (const character in parsedResponse.characterPercentages) {
+            if (character !== primary) {
+                const percentage = parsedResponse.characterPercentages[character];
+                if (percentage >= primaryPercentage) {
+                    hasInconsistency = true;
+                }
+                maxOtherPercentage = Math.max(maxOtherPercentage, percentage);
+            }
+        }
+        
+        // Fix inconsistency by adjusting percentages
+        if (hasInconsistency) {
+            console.warn(`🔧 FIXING CONSISTENCY BUG: Primary character ${primary} had ${primaryPercentage}% but another character had ${maxOtherPercentage}%`);
+            
+            // Set primary to be at least 5-10% higher than the highest other
+            const newPrimaryPercentage = Math.min(95, Math.max(80, maxOtherPercentage + 10));
+            parsedResponse.characterPercentages[primary] = newPrimaryPercentage;
+            
+            console.log(`✅ Fixed: ${primary} now has ${newPrimaryPercentage}% (was ${primaryPercentage}%)`);
+        }
+
+        // Filter counterArguments to remove the entry for the primary character
         const filteredCounters = {};
         for (const character in parsedResponse.counterArguments) {
             if (character !== primary && parsedResponse.counterArguments[character]) {
