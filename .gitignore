@@ -44,3 +44,9 @@ next-env.d.ts
 
 # cursor IDE
 .cursor/
+
+# foundry
+broadcast/
+cache/
+out/
+lib/forge-std

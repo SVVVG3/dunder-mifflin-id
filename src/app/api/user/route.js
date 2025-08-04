@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { getUserDataFromNeynar, getRecentCastTexts } from '@/lib/neynar';
-import { analyzeSopranosCharacter } from '@/lib/gemini';
+import { analyzeOfficeCharacter } from '@/lib/gemini';
 
 // Set runtime to edge
 export const runtime = 'edge';
@@ -41,14 +41,14 @@ export async function GET(request) {
     const bio = userData.profile?.bio?.text || null;
 
     // Analyze using Gemini
-    const sopranosAnalysis = await analyzeSopranosCharacter(bio, castTexts);
+    const officeAnalysis = await analyzeOfficeCharacter(bio, castTexts);
 
-    if (!sopranosAnalysis) {
-      console.error(`Failed to get Sopranos analysis from Gemini for FID: ${fid}`);
+    if (!officeAnalysis) {
+      console.error(`Failed to get Office analysis from Gemini for FID: ${fid}`);
       return NextResponse.json({ error: 'Failed to analyze user profile' }, { status: 500 });
     }
 
-    console.log(`Successfully received Sopranos analysis for FID: ${fid}. Primary Character: ${sopranosAnalysis.primaryCharacter}`);
+    console.log(`Successfully received Office analysis for FID: ${fid}. Primary Character: ${officeAnalysis.primaryCharacter}`);
 
     // Combine results
     const responseData = {
@@ -56,8 +56,8 @@ export async function GET(request) {
       username: userData.username,
       pfp_url: userData.pfp_url,
       display_name: userData.display_name,
-      // Sopranos analysis
-      sopranos: sopranosAnalysis, // Nest the analysis object
+      // Office analysis
+      office: officeAnalysis, // Nest the analysis object
     };
 
     return NextResponse.json(responseData);

@@ -1,256 +1,256 @@
-# What X Are You - Farcaster Frame Template
+# 🏢 Dunder Mifflin Employee ID - Farcaster Mini App
 
-## Overview
+A viral Farcaster Mini App that analyzes your personality using AI and mints you a personalized **Dunder Mifflin Employee ID** NFT on Base. Users discover which Office character they most resemble and can mint their official employee badge!
 
-A Farcaster mini-app template that analyzes user profiles and casts to determine their or whatever you want.
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/YOUR_USERNAME/dunder-mifflin-id)
 
-- **Neynar API** - Fetches Farcaster user data and casts
-- **Google Gemini API** - AI analysis of user personality traits
-- **Cloudflare R2** (optional) - Stores shareable result images
+## ✨ Features
 
-## Getting Started
+### 🤖 AI-Powered Personality Analysis
+- Uses **Google Gemini** to analyze Farcaster user profiles and recent casts
+- Matches personality traits to 10 iconic Office characters
+- Provides detailed analysis with evidence and reasoning
+- Anti-bias system prevents defaulting to popular characters like Jim Halpert
 
-### 1. Prerequisites
+### 🎨 Dynamic ID Card Generation  
+- Generates personalized Dunder Mifflin employee ID cards
+- Includes user's profile picture, character match, and analysis
+- Professional ID card design with company branding
+- Powered by **Vercel OG** for dynamic image generation
 
-- Cursor or Visual Studio Code with Copilot enabled
-- Ability to open up your Terminal (in Applications/Utilities folder) and run `npm --version` and have it spit out a number
+### 💰 NFT Minting with USDC
+- **$1 USDC** minting on Base network
+- Deployed smart contract: `0x647a7E29991Df1192C0fF4264c18CD7001c05787`
+- Prevents duplicate mints per wallet
+- Full metadata stored on-chain and IPFS-compatible
 
-If you do not have `npm` installed yet please Open the Terminal app and run:
+### 🔗 Viral "Share to Claim" Mechanic
+- Users must share their results to unlock minting
+- Drives organic growth through social sharing
+- Custom share images with personalized ID cards
 
+### 🛠️ Built with Best Practices
+- **Farcaster Mini Apps SDK** with official wagmi connector
+- **Wagmi + Viem** for Web3 interactions
+- **Foundry** for smart contract development
+- **Cloudflare R2** for image storage
+- **TypeScript-ready** architecture
+
+## 📦 Tech Stack
+
+- **Frontend**: Next.js 15, React 19, CSS Modules
+- **Web3**: Wagmi, Viem, Farcaster Mini Apps SDK
+- **AI**: Google Gemini 2.0 Flash
+- **Storage**: Cloudflare R2
+- **Blockchain**: Base (Ethereum L2)
+- **Smart Contracts**: Solidity, Foundry
+- **Deployment**: Vercel
+
+## 🚀 Quick Start
+
+### Prerequisites
+- Node.js 18+
+- Farcaster account
+- Base wallet with USDC for testing
+
+### 1. Clone & Install
 ```bash
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
-nvm use stable
-```
-
-After that run `npm --version` and ensure it says something like 10.9.2 or any other numbers
-
-### 2. Clone the Repository
-
-Open the Terminal app and run:
-
-```bash
-cd ~/Documents/
-git clone https://github.com/jc4p/what-x-are-you-template
-cd what-x-are-you-template
-```
-
-### 3. Set Up Environment Variables
-
-Create your environment file by copying the sample:
-
-```bash
-# Copy the sample environment file
-cp .env.sample .env.local
-```
-
-This creates a `.env.local` file with the following structure:
-
-```bash
-# Required
-NEYNAR_API_KEY=your_neynar_api_key_here
-GEMINI_API_KEY=your_gemini_api_key_here
-
-# So the app knows what it's URL is
-NEXT_PUBLIC_APP_URL=http://localhost:3000
-
-# Optional - Cloudflare R2 for image sharing
-R2_ACCESS_KEY_ID=your_r2_access_key_id
-R2_SECRET_ACCESS_KEY=your_r2_secret_access_key
-R2_ACCOUNT_ID=your_cloudflare_account_id
-R2_BUCKET_NAME=your_bucket_name
-R2_PUBLIC_URL=https://your-bucket-url.r2.dev
-```
-
-### 4. Get Your API Keys
-
-Now you'll need to get the API keys and fill them into your `.env.local` file:
-
-#### Neynar API Key
-1. Go to [neynar.com](https://neynar.com)
-2. Sign up and navigate to the dashboard
-3. Create a new app
-4. Copy your API key
-5. Replace `your_neynar_api_key_here` in your `.env.local` file
-
-#### Google Gemini API Key
-1. Visit [aistudio.google.com](https://aistudio.google.com)
-2. Sign in with your Google account
-3. Click "Get API key" on the top right of the page
-4. Create a new API key
-5. Copy the API key
-6. Replace `your_gemini_api_key_here` in your `.env.local` file
-
-#### Cloudflare R2 (Optional - for enhanced image sharing)
-**Note**: Sharing works without R2, but R2 provides custom result images when sharing.
-
-1. Log into [Cloudflare Dashboard](https://dash.cloudflare.com)
-2. Go to R2 Object Storage
-3. Create a bucket if you don't have one
-4. Go to Manage R2 API Tokens → Create API token
-5. Set permissions to "Object Read & Write"
-6. Create token and save the credentials
-7. Set up a public bucket URL for serving images
-8. Fill in all the R2 variables in your `.env.local` file
-
-### 5. Install Dependencies and Run
-
-```bash
-# Install dependencies
+git clone https://github.com/YOUR_USERNAME/dunder-mifflin-id.git
+cd dunder-mifflin-id
 npm install
-
-# Run development server
-npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) in your browser.
+### 2. Environment Setup
+Create `.env` with the following variables:
 
-**Note**: This app is designed to run inside a Farcaster Frame. Opening the page alone will just show "Waiting for frame context..."
-
-## Development Guide
-
-### Updating the quiz
-
-The intent of this template is for you to update to be any "What [..] are you?", it has Hogwarts house as the default to show you how to do this.
-
-In `src/lib/gemini.js` you will see two things:
-
-1. The output format we want from Gemini, at the top of the file. This is the end data we show the user.
-2. The prompt we send Gemini in the middle of the file.
-
-In `src/compoments/HomeComponent.jsx` you will find the entire front-end logic.
-
-Any changes you make to the schema in `gemini.js` will need to be reflected in the `HomeComponent.jsx`, that is the file responsible for taking the extracted data from Gemini and rendering it to the user.
-
-You can update both files using vibe coding to modify it into any format you want or to reorder the components on the page or add any new visualizations you want.
-
-## Loading in Farcaster debugger
-
-To debug your frame on Farcaster the recommended method is to utilize ngrok to make your local server accessible to the internet.
-
-### 1. Create a Free ngrok Account
-1. Go to [ngrok.com](https://ngrok.com)
-2. Sign up for a free account
-3. Once logged in, ignore the installation instructions and find the "Your authtoken" section
-4. Copy your authtoken
-
-### 2. Install and Setup ngrok
 ```bash
-# Install ngrok for OSX
-wget https://bin.equinox.io/c/bNyj1mQVY4c/ngrok-v3-stable-darwin-arm64.zip && sudo unzip ~/Downloads/ngrok-v3-stable-darwin-arm64.zip -d /usr/local/bin
+# AI & User Data
+GEMINI_API_KEY=your_gemini_api_key
+NEYNAR_API_KEY=your_neynar_api_key
 
-# Authenticate with your token (replace with your actual token)
-ngrok config add-authtoken YOUR_AUTHTOKEN_HERE
+# Cloudflare R2 Storage
+R2_ACCOUNT_ID=your_r2_account_id
+R2_ACCESS_KEY_ID=your_r2_access_key
+R2_SECRET_ACCESS_KEY=your_r2_secret_key
+R2_BUCKET_NAME=your_bucket_name
+R2_PUBLIC_URL=https://pub-xxxxx.r2.dev
+
+# App Configuration
+NEXT_PUBLIC_APP_URL=http://localhost:3000
+NEXT_PUBLIC_NFT_CONTRACT_ADDRESS=0x647a7E29991Df1192C0fF4264c18CD7001c05787
+
+# Smart Contract Deployment (Optional)
+PRIVATE_KEY=your_wallet_private_key
+BASE_RPC_URL=https://mainnet.base.org
+BASESCAN_API_KEY=your_basescan_api_key
 ```
 
-### 3. Run Your Development Server and ngrok
+### 3. Development
 ```bash
-# Terminal 1: Start your Next.js development server
+# Start development server
 npm run dev
 
-# Terminal 2: Start ngrok tunnel (in a new terminal window)
-ngrok http 3000 --url your-project-name.ngrok.app
+# Test with ngrok for Farcaster
+npx ngrok http 3000
+# Update NEXT_PUBLIC_APP_URL in .env with ngrok URL
 ```
 
-**Note**: Replace `your-project-name` with a unique name for your project.
+### 4. Smart Contract Development
+```bash
+# Install Foundry
+curl -L https://foundry.paradigm.xyz | bash
+foundryup
 
-### 4. Test Your Frame
-1. Copy the ngrok URL (e.g., `https://your-project-name.ngrok.app`)
-2. Paste it into https://farcaster.xyz/~/developers/mini-apps/preview and hit enter
-3. Hit "Open URL as Mini App"
+# Compile contracts
+forge build
 
-### Cursor/AI Coding Prompts
+# Run tests
+forge test
 
-Some starter effective prompts:
-
-#### Understanding the codebase
-```
-"Analyze the codebase and give me a step by step breakdown of how it works and where I can make modifications"
-```
-
-#### Adding New Analysis Types
-```
-"Update the analysis prompt and frontend to what [Pokemon/Marvel character/etc] the user is most like. Follow the existing Hogwarts House pattern in gemini.js, create a new schema, and update the HomeComponent to display the results."
+# Deploy to Base (optional - contract already deployed)
+forge script script/DeployDunderMifflin.s.sol:DeployDunderMifflin --rpc-url base --broadcast --verify
 ```
 
-#### Customizing Visual Design
-```
-"Update the UI design to have a [dark mode/cyberpunk/minimalist] theme. Modify the CSS modules and color schemes while maintaining the existing component structure."
-```
+## 🎭 Office Characters
 
-## File Structure
+The app analyzes personality traits and matches users to one of 10 characters:
 
-### Core Files
+- **Jim Halpert**: Witty, sarcastic, prankster
+- **Pam Beesly**: Artistic, kind, supportive  
+- **Dwight Schrute**: Intense, loyal, eccentric
+- **Michael Scott**: Well-meaning leader, inappropriate humor
+- **Angela Martin**: Organized, judgmental, perfectionist
+- **Stanley Hudson**: No-nonsense, dry humor, boundaries
+- **Kelly Kapoor**: Pop culture obsessed, dramatic
+- **Oscar Martinez**: Intellectual, fact-checker, sophisticated
+- **Darryl Philbin**: Street smart, musical, ambitious
+- **Kevin Malone**: Simple pleasures, food-focused, childlike
 
-#### `/src/components/HomeComponent.jsx`
-The main UI component that:
-- Detects Farcaster Frame context
-- Fetches user analysis from the API
-- Displays results with house colors and percentages
-- Handles sharing functionality (works with or without R2)
+## 🏗️ Architecture
 
-#### `/src/lib/gemini.js`
-Gemini AI integration:
-- Defines the analysis schema for Hogwarts Houses
-- Sends user bio and casts to Gemini
-- Returns structured analysis with house percentages and evidence
+### Smart Contract (`DunderMifflinID.sol`)
+- **ERC-721** NFT with on-chain metadata
+- **USDC payment** integration ($1 per mint)
+- **Duplicate prevention** (one mint per address)
+- **Character analytics** tracking
+- **Emergency functions** for admin
 
-#### `/src/lib/neynar.js`
-Neynar API integration:
-- `getUserDataFromNeynar()` - Fetches user profile data
-- `getRecentCastTexts()` - Retrieves user's recent casts with pagination
-
-#### `/src/lib/frame.js`
-Farcaster Frame SDK initialization:
-- Detects Frame context
-- Extracts user FID
-- Signals frame ready state
-
-#### `/src/lib/r2.js`
-Cloudflare R2 integration (optional):
-- Uploads generated share images
-- Returns public URLs for sharing
-- Gracefully disabled if not configured
+### Frontend Components
+- `HomeComponent`: Main app interface and minting logic
+- `WagmiProvider`: Web3 wallet connection setup
+- `FrameInit`: Farcaster Mini App initialization
 
 ### API Routes
+- `/api/user`: Fetches user data and runs AI analysis
+- `/api/create-share-link`: Generates shareable results
+- `/api/og`: Dynamic Open Graph image generation
+- `/api/splash`: Mini App splash screen
 
-#### `/src/app/api/user/route.js`
-Main analysis endpoint:
-- Accepts FID as query parameter
-- Fetches user data from Neynar
-- Runs Gemini analysis
-- Returns combined results
+### Image Generation
+- Dynamic ID cards with user data
+- Professional Dunder Mifflin branding
+- Character headshots and company assets
+- Optimized for social sharing
 
-#### `/src/app/api/create-share-link/route.js`
-Share link generation:
-- Creates shareable URLs that work with or without R2
-- If R2 is configured: creates OG image, uploads to R2, includes custom image
-- If R2 is not configured: returns basic shareable URL without custom image
+## 📱 Farcaster Integration
 
-#### `/src/app/api/og/route.js`
-Open Graph image generator:
-- Generates dynamic share images
-- Uses Vercel OG library
+### Mini App Configuration
+The app includes proper Farcaster Mini App setup:
+- `farcaster.json` manifest
+- Account association proofs
+- Proper meta tags for embed rendering
+- Share intent integration
 
-### Configuration Files
+### Testing in Farcaster
+1. Deploy to a public URL (Vercel, ngrok, etc.)
+2. Update `NEXT_PUBLIC_APP_URL` in environment
+3. Test in Warpcast or other Farcaster clients
+4. Share functionality creates viral growth
 
-#### `/src/app/page.js`
-- Sets Frame metadata
-- Configures preview and splash images
+## 🔧 Deployment
 
-#### `/src/components/FrameInit.jsx`
-- Client-side Frame initialization wrapper
+### Vercel Deployment
+1. Push code to GitHub
+2. Connect repository to Vercel
+3. Add environment variables in Vercel dashboard
+4. Deploy automatically on push
 
-## Customization Tips
+### Environment Variables for Production
+Make sure to set all required environment variables in your Vercel dashboard:
+- All API keys (Gemini, Neynar, R2, Basescan)
+- Contract address and blockchain config
+- Set `NEXT_PUBLIC_APP_URL` to your production domain
 
-1. **Change Analysis Theme**: Modify the schema in `gemini.js` to analyze for different categories
-2. **Update Styling**: Edit CSS modules in component folders
-3. **Add New API Integrations**: Create new files in `/src/lib/`
-4. **Extend Analysis**: Add more data sources in the `/api/user` route
-5. **Custom Sharing**: Modify the OG image template in `/api/og`
+### Custom Domain (Optional)
+- Add your domain in Vercel settings
+- Update `farcaster.json` manifest with production URL
+- Test Mini App functionality on production
 
-## Troubleshooting
+## 🧪 Testing
 
-- **"Not in frame context"**: The app must be opened within a Farcaster client
-- **API errors**: Check your environment variables are set correctly
-- **Share button fails**: R2 configuration is optional; sharing works without R2 but won't include custom images
-- **No user data**: Ensure the FID exists and Neynar API key is valid
+### Unit Tests
+```bash
+# Smart contract tests
+forge test -vvv
+
+# Run specific test
+forge test --match-test testMintEmployeeID
+```
+
+### Integration Testing
+1. Test AI analysis with various Farcaster profiles
+2. Verify image generation and sharing
+3. Test minting flow end-to-end
+4. Validate wallet connections and network switching
+
+## 🐛 Troubleshooting
+
+### Common Issues
+
+**"Wallet showing malicious token warning"**
+- This is normal for new contracts - click "Continue Anyway"
+- Warning disappears as contract gains recognition
+
+**"CALL_EXCEPTION errors"**
+- Ensure you're using the wagmi connector, not direct ethers.js
+- Check that Base network is properly configured
+
+**"Image generation failing"**
+- Verify R2 credentials and bucket permissions
+- Check that all character images exist in `/public/characters/`
+
+**"Farcaster embed not showing"**
+- Ensure `farcaster.json` has correct production URLs
+- Check meta tags are properly set
+- Allow 5-10 minutes for Farcaster cache to update
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🙏 Acknowledgments
+
+- **The Office** for endless entertainment and memorable characters
+- **Farcaster** for the decentralized social protocol
+- **Base** for affordable blockchain transactions
+- **OpenZeppelin** for secure smart contract primitives
+- **Vercel** for seamless deployment
+
+## 📞 Support
+
+For support or questions:
+- Open an issue on GitHub
+- Reach out on Farcaster: [@your-farcaster-handle]
+- Join our community discussions
+
+---
+
+**Built with ❤️ for the Farcaster community. That's what she said. - Michael Scott**

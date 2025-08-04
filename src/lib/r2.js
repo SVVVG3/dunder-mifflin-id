@@ -30,13 +30,12 @@ export async function uploadToR2(fileBuffer, fileName, contentType) {
     Key: fileName, // e.g., 'what-x-are-you/share-image-fid-timestamp.png'
     Body: fileBuffer,
     ContentType: contentType,
-    ACL: 'public-read', // Optional: if you want the file to be publicly accessible directly
+    // Note: R2 doesn't support ACL - public access must be configured at bucket level
   });
 
   try {
     await s3Client.send(command);
     const publicUrl = `${process.env.R2_PUBLIC_URL}/${fileName}`;
-    // console.log(`File uploaded successfully: ${publicUrl}`);
     return publicUrl;
   } catch (error) {
     console.error("Error uploading to R2:", error);

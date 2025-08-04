@@ -1,5 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // Allow ngrok and other dev origins
+  allowedDevOrigins: ['8a08d2da340d.ngrok-free.app'],
+  
   async headers() {
     return [
       {

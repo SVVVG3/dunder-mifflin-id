@@ -8,27 +8,31 @@ if (!GEMINI_API_KEY) {
 
 const genAI = new GoogleGenerativeAI(GEMINI_API_KEY || '');
 
-// Define the schema for the Sopranos Character analysis
-const sopranosSchema = {
+// Define the schema for The Office Character analysis
+const officeSchema = {
   type: SchemaType.OBJECT,
   properties: {
     primaryCharacter: {
       type: SchemaType.STRING,
-      description: "The Sopranos character that best represents the user based on their traits.",
-      enum: ["Dr. Jennifer Melfi", "Silvio Dante", "Carmela Soprano", "Christopher Moltisanti", "Paulie Gualtieri", "Tony Soprano"],
+      description: "The Office character that best represents the user based on their traits.",
+      enum: ["Jim Halpert", "Pam Beesly", "Dwight Schrute", "Michael Scott", "Angela Martin", "Stanley Hudson", "Kelly Kapoor", "Oscar Martinez", "Darryl Philbin", "Kevin Malone"],
     },
     characterPercentages: {
       type: SchemaType.OBJECT,
-      description: "An estimated percentage affinity for each Sopranos character (0-100). These represent affinity and do not need to sum to 100.",
+      description: "An estimated percentage affinity for each Office character (0-100). Most people share traits with multiple characters - avoid giving too many 0% scores. These represent affinity and do not need to sum to 100.",
       properties: {
-        "Dr. Jennifer Melfi": { type: SchemaType.NUMBER, description: "Percentage affinity for Dr. Melfi (analytical nature, professionalism, ethical principles, wisdom)." },
-        "Silvio Dante": { type: SchemaType.NUMBER, description: "Percentage affinity for Silvio Dante (calm demeanor, business acumen, reliability, strategic thinking)." },
-        "Carmela Soprano": { type: SchemaType.NUMBER, description: "Percentage affinity for Carmela Soprano (family devotion, moral conflict, materialism, strength)." },
-        "Christopher Moltisanti": { type: SchemaType.NUMBER, description: "Percentage affinity for Christopher Moltisanti (ambition, creativity, impulsiveness, loyalty)." },
-        "Paulie Gualtieri": { type: SchemaType.NUMBER, description: "Percentage affinity for Paulie Gualtieri (superstition, old-school values, humor, loyalty)." },
-        "Tony Soprano": { type: SchemaType.NUMBER, description: "Percentage affinity for Tony Soprano (leadership, complexity, family loyalty, ruthlessness)." },
+        "Jim Halpert": { type: SchemaType.NUMBER, description: "Percentage affinity for Jim Halpert (wit, pranks, laid-back attitude, charm, observational humor)." },
+        "Pam Beesly": { type: SchemaType.NUMBER, description: "Percentage affinity for Pam Beesly (kindness, artistic nature, supportive, gentle humor, empathy)." },
+        "Dwight Schrute": { type: SchemaType.NUMBER, description: "Percentage affinity for Dwight Schrute (intensity, dedication, competitive, unique interests, loyalty)." },
+        "Michael Scott": { type: SchemaType.NUMBER, description: "Percentage affinity for Michael Scott (leadership attempts, humor, social awkwardness, caring nature, attention-seeking)." },
+        "Angela Martin": { type: SchemaType.NUMBER, description: "Percentage affinity for Angela Martin (organization, high standards, judgmental tendencies, cat love, perfectionism)." },
+        "Stanley Hudson": { type: SchemaType.NUMBER, description: "Percentage affinity for Stanley Hudson (no-nonsense attitude, crossword puzzles, work-life boundaries, dry humor)." },
+        "Kelly Kapoor": { type: SchemaType.NUMBER, description: "Percentage affinity for Kelly Kapoor (social media obsession, pop culture enthusiasm, dramatic storytelling, relationship focus)." },
+        "Oscar Martinez": { type: SchemaType.NUMBER, description: "Percentage affinity for Oscar Martinez (intellectualism, fact-checking, political awareness, sophisticated tastes, condescension)." },
+        "Darryl Philbin": { type: SchemaType.NUMBER, description: "Percentage affinity for Darryl Philbin (street smarts, music interests, leadership potential, warehouse wisdom, ambition)." },
+        "Kevin Malone": { type: SchemaType.NUMBER, description: "Percentage affinity for Kevin Malone (simple pleasures, food obsession, childlike wonder, gambling interests, unexpected insights)." },
       },
-      required: ["Dr. Jennifer Melfi", "Silvio Dante", "Carmela Soprano", "Christopher Moltisanti", "Paulie Gualtieri", "Tony Soprano"],
+      required: ["Jim Halpert", "Pam Beesly", "Dwight Schrute", "Michael Scott", "Angela Martin", "Stanley Hudson", "Kelly Kapoor", "Oscar Martinez", "Darryl Philbin", "Kevin Malone"],
     },
     summary: {
         type: SchemaType.STRING,
@@ -70,14 +74,18 @@ const sopranosSchema = {
     },
     counterArguments: {
         type: SchemaType.OBJECT,
-        description: "Brief explanations (1-2 sentences each) for why the user doesn\'t primarily align with the *other* five characters, written directly to the user. Keys should be the character names.",
+        description: "Brief explanations (1-2 sentences each) for why the user doesn\'t primarily align with the *other* nine characters, written directly to the user. Keys should be the character names.",
         properties: {
-            "Dr. Jennifer Melfi": { type: SchemaType.STRING, description: "Why not primarily Dr. Jennifer Melfi? Focus on contrasting traits.", maxLength: 150 },
-            "Silvio Dante": { type: SchemaType.STRING, description: "Why not primarily Silvio Dante? Focus on contrasting traits.", maxLength: 150 },
-            "Carmela Soprano": { type: SchemaType.STRING, description: "Why not primarily Carmela Soprano? Focus on contrasting traits.", maxLength: 150 },
-            "Christopher Moltisanti": { type: SchemaType.STRING, description: "Why not primarily Christopher Moltisanti? Focus on contrasting traits.", maxLength: 150 },
-            "Paulie Gualtieri": { type: SchemaType.STRING, description: "Why not primarily Paulie Gualtieri? Focus on contrasting traits.", maxLength: 150 },
-            "Tony Soprano": { type: SchemaType.STRING, description: "Why not primarily Tony Soprano? Focus on contrasting traits.", maxLength: 150 },
+            "Jim Halpert": { type: SchemaType.STRING, description: "Why not primarily Jim Halpert? Focus on contrasting traits.", maxLength: 150 },
+            "Pam Beesly": { type: SchemaType.STRING, description: "Why not primarily Pam Beesly? Focus on contrasting traits.", maxLength: 150 },
+            "Dwight Schrute": { type: SchemaType.STRING, description: "Why not primarily Dwight Schrute? Focus on contrasting traits.", maxLength: 150 },
+            "Michael Scott": { type: SchemaType.STRING, description: "Why not primarily Michael Scott? Focus on contrasting traits.", maxLength: 150 },
+            "Angela Martin": { type: SchemaType.STRING, description: "Why not primarily Angela Martin? Focus on contrasting traits.", maxLength: 150 },
+            "Stanley Hudson": { type: SchemaType.STRING, description: "Why not primarily Stanley Hudson? Focus on contrasting traits.", maxLength: 150 },
+            "Kelly Kapoor": { type: SchemaType.STRING, description: "Why not primarily Kelly Kapoor? Focus on contrasting traits.", maxLength: 150 },
+            "Oscar Martinez": { type: SchemaType.STRING, description: "Why not primarily Oscar Martinez? Focus on contrasting traits.", maxLength: 150 },
+            "Darryl Philbin": { type: SchemaType.STRING, description: "Why not primarily Darryl Philbin? Focus on contrasting traits.", maxLength: 150 },
+            "Kevin Malone": { type: SchemaType.STRING, description: "Why not primarily Kevin Malone? Focus on contrasting traits.", maxLength: 150 },
         },
     },
   },
@@ -85,12 +93,12 @@ const sopranosSchema = {
 };
 
 /**
- * Analyzes a user's bio and casts to determine their Sopranos Character affinity.
+ * Analyzes a user's bio and casts to determine their Office Character affinity.
  * @param {string | null} bio - The user's Farcaster bio.
  * @param {string[]} casts - An array of the user's recent cast texts.
- * @returns {Promise<object | null>} The analysis result matching sopranosSchema or null if an error occurs.
+ * @returns {Promise<object | null>} The analysis result matching officeSchema or null if an error occurs.
  */
-export async function analyzeSopranosCharacter(bio, casts) {
+export async function analyzeOfficeCharacter(bio, casts) {
   if (!GEMINI_API_KEY) {
     console.error("Cannot analyze: GEMINI_API_KEY is not set.");
     return null;
@@ -109,18 +117,31 @@ export async function analyzeSopranosCharacter(bio, casts) {
       topP: 0.9,
       maxOutputTokens: 2048,
       responseMimeType: "application/json",
-      responseSchema: sopranosSchema,
+      responseSchema: officeSchema,
     },
   });
 
-  const prompt = `Analyze this Farcaster user's bio and recent casts to determine which Sopranos character they most resemble. **IMPORTANT: Consider ALL characters equally - do not default to Tony Soprano. Each character is equally likely.** Assign a primary character and percentage affinities (0-100) for all six characters based on these character traits:
+  const prompt = `Analyze this Farcaster user's bio and recent casts to determine which Office character they most resemble. 
 
-*   **Dr. Jennifer Melfi:** Analytical and intellectual nature, professional ethics and boundaries, wisdom and insight, calm under pressure, principled decision-making, therapeutic mindset, academic perspective, moral clarity, helping others through analysis.
-*   **Silvio Dante:** Calm and level-headed demeanor, excellent business acumen, reliability and steadiness, strategic thinking, diplomatic approach, loyalty without drama, practical wisdom, behind-the-scenes influence, measured responses.
-*   **Carmela Soprano:** Strong family devotion, moral conflict about lifestyle, materialism and status consciousness, inner strength and resilience, religious faith, loyalty despite personal cost, sophisticated taste, protective of children, complex moral reasoning.
-*   **Christopher Moltisanti:** Ambition and desire for respect, creative/artistic aspirations, impulsiveness and emotional volatility, loyalty to mentors, addiction struggles, violence mixed with sensitivity, dreams of bigger things, insecurity, artistic expression.
-*   **Paulie Gualtieri:** Superstitious nature, old-school values and traditions, humor and storytelling, fierce loyalty to the family, paranoia, simple pleasures, directness, survivor instinct, colorful anecdotes, traditional mindset.
-*   **Tony Soprano:** Mob boss leadership with therapy sessions, panic attacks and anxiety, ruthless business decisions mixed with emotional vulnerability, compartmentalization of violence and family life, therapy discussions, anger management issues, complex relationship with power and violence.
+**CRITICAL: AVOID CHARACTER BIAS**
+- Do NOT default to Jim Halpert, Michael Scott, or any single character
+- Each of the 10 characters is equally likely to be the best match
+- Look for SPECIFIC traits that distinguish characters from each other
+- If someone seems "generally funny," consider ALL humor types: Jim's sarcasm, Michael's inappropriate humor, Stanley's dry wit, Kelly's dramatic stories, etc.
+- Be more selective - not everyone who makes jokes is Jim Halpert!
+
+Assign a primary character and percentage affinities (0-100) for all ten characters based on these character traits:
+
+*   **Jim Halpert:** Witty and sarcastic humor, pranks and playful mischief, laid-back and easygoing attitude, observational comedy, charming and likeable personality, good with relationships, sports fan, sales skills without being pushy, subtle leadership, making light of serious situations.
+*   **Pam Beesly:** Kind and empathetic nature, artistic and creative interests, supportive of others, gentle sense of humor, conflict-avoidant but stands up when needed, organized and detail-oriented, motherly instincts, genuine and authentic, good listener, appreciates simple pleasures.
+*   **Dwight Schrute:** Intense dedication and work ethic, competitive and ambitious, unique hobbies and interests (farming, martial arts, etc.), loyal to authority figures, eccentric personality, survival mindset, traditional values, takes things very seriously, knowledgeable about obscure topics, protective of those he cares about.
+*   **Michael Scott:** Attempts at leadership and management, well-meaning but often misguided, seeks attention and approval, inappropriate humor, caring deeply about employees, social awkwardness, overconfidence masking insecurity, loves pop culture, wants to be liked by everyone, creative but impractical ideas.
+*   **Angela Martin:** Highly organized and detail-oriented, judgmental and critical of others, high moral standards, perfectionist tendencies, loves cats, conservative values, likes control, passive-aggressive behavior, secretly caring underneath stern exterior, appreciates proper etiquette and manners.
+*   **Stanley Hudson:** No-nonsense attitude toward work, dry and deadpan humor, strong work-life boundaries, enjoys simple pleasures (crosswords, sudoku), practical and realistic, doesn't engage in office drama, values stability, straightforward communication, enjoys retirement planning, focused on personal interests.
+*   **Kelly Kapoor:** Social media and pop culture obsessed, dramatic storytelling and exaggeration, relationship-focused conversations, trendy and fashion-conscious, gossip enthusiast, emotional and reactive, seeks attention through drama, loves celebrity culture, impulsive decision-making, talks rapidly and enthusiastically.
+*   **Oscar Martinez:** Intellectual and well-educated, fact-checking and correcting others, politically aware and opinionated, sophisticated cultural tastes, sometimes condescending, values accuracy and precision, enjoys debates and discussions, gay pride and identity awareness, analytical thinking, appreciation for fine arts.
+*   **Darryl Philbin:** Street-smart and practical wisdom, music interests (especially hip-hop), natural leadership potential, warehouse experience and blue-collar background, ambitious for career advancement, good with technology, entrepreneurial spirit, mentoring others, realistic about workplace dynamics, bridge between office and warehouse cultures.
+*   **Kevin Malone:** Simple pleasures and childlike wonder, food obsession (especially M&Ms and chili), gambling interests and fantasy sports, unexpected moments of insight, mathematical abilities mixed with general confusion, loyalty to friends, enjoys bands and music, straightforward communication style, finds joy in small things, sometimes surprising wisdom.
 
 **Input Data:**
 Bio: ${bio || 'No bio provided.'}
@@ -128,19 +149,40 @@ Recent Casts (max ${casts.length > 50 ? 50 : casts.length}):
 ${casts.slice(0, 50).join('\n---\n')} ${casts.length > 50 ? '\n[... additional casts truncated]' : ''}
 
 **Analysis Instructions:**
-1.  **NO DEFAULT BIAS:** Do NOT default to Tony Soprano. Each character is equally likely. Consider the user's specific traits carefully.
-2.  **Percentages:** Estimate affinity for EACH character (0-100%). Do NOT need to sum to 100. Be realistic - most people will have low percentages for characters that don't match.
-3.  **Primary Character:** Determine the single BEST fit from the six Sopranos characters based on SPECIFIC traits, not general ones.
-4.  **Summary (Analyst Voice - Direct):** Write a 2-4 sentence summary addressing the user directly with "You" and "Your". Start with observation (e.g., "Looking at your posts...", "Based on your communication style..."), specifically mention 1-2 key traits *you observed* in *their* casts/bio that strongly align with the chosen character, and *then* make the character assignment (e.g., "Your [specific trait] and [specific behavior] most closely align with [Primary Character]"). Be insightful and specific.
-5.  **Evidence:** Provide EXACTLY 3 pieces of evidence (trait, 1-2 short quotes max 10 words, 1 sentence explanation TO the user).
-6.  **Counter Arguments:** For the FIVE characters that are *NOT* the primary character, provide a brief (1-2 sentence) explanation TO THE USER about why they don't fit *primarily* into that character archetype, focusing on contrasting traits.
+1.  **NO DEFAULT BIAS:** Do NOT default to Jim Halpert, Michael Scott, or any character. Each character is equally likely. Look for DISTINCTIVE traits that set characters apart.
+2.  **Character Differentiation:** Be specific about what makes each character unique:
+    - Jim: SARCASTIC pranks, not just any humor
+    - Pam: ARTISTIC and gentle, not just kind
+    - Dwight: INTENSE and eccentric, not just dedicated
+    - Michael: INAPPROPRIATE humor and attention-seeking, not just leadership
+    - Angela: JUDGMENTAL perfectionism, not just organized
+    - Stanley: DRY humor and work boundaries, not just no-nonsense
+    - Kelly: POP CULTURE obsession and drama, not just social
+    - Oscar: INTELLECTUAL condescension, not just smart
+    - Darryl: STREET SMARTS and music, not just practical
+    - Kevin: CHILDLIKE wonder and food obsession, not just simple
+3.  **Percentages:** The PRIMARY character must have the HIGHEST percentage (70-95%). Other characters should reflect realistic personality overlap:
+    - Strong secondary matches: 40-60%
+    - Moderate similarities: 20-40% 
+    - Minimal overlap: 5-20%
+    - Only give 0% if there's truly NO shared traits (rare)
+4.  **Primary Character:** Choose based on the STRONGEST distinguishing traits, and ensure this character has the highest percentage score to avoid user confusion.
+5.  **Summary:** Address user directly with specific observed traits that align with the chosen character.
+6.  **Evidence:** Provide EXACTLY 3 pieces of evidence with specific quotes and explanations.
+7.  **Counter Arguments:** Explain why the user doesn't match the other 9 characters' distinctive traits.
 
 **IMPORTANT FORMATTING & STYLE:**
 *   Adhere STRICTLY to the JSON schema.
 *   Write summary, explanations, and counter-arguments directly TO the user (use "You"/"Your").
 *   Be concise and specific.
 *   Base analysis only on provided text.
-*   Focus on behavioral patterns, communication style, values, and personality traits that match the Sopranos characters.
+*   Focus on behavioral patterns, communication style, values, and personality traits that match the Office characters.
+
+**CRITICAL CONSISTENCY CHECK:**
+*   The primaryCharacter MUST have the highest percentage in characterPercentages (70-95%)
+*   This prevents user confusion where their "mentor" has a lower score than someone else
+*   If you choose Darryl as primary, he should have 80%+ while others have lower scores
+*   The percentages should logically support your primary character choice
 
 Please provide the analysis in the specified JSON format.`;
 
@@ -174,9 +216,9 @@ Please provide the analysis in the specified JSON format.`;
         }
         parsedResponse.counterArguments = filteredCounters;
 
-        // Check if we have 5 counter arguments now
-        if (Object.keys(parsedResponse.counterArguments).length !== 5) {
-             console.warn(`Expected 5 counter arguments after filtering, but got ${Object.keys(parsedResponse.counterArguments).length}. Primary: ${primary}`, parsedResponse.counterArguments);
+        // Check if we have 9 counter arguments now
+        if (Object.keys(parsedResponse.counterArguments).length !== 9) {
+             console.warn(`Expected 9 counter arguments after filtering, but got ${Object.keys(parsedResponse.counterArguments).length}. Primary: ${primary}`, parsedResponse.counterArguments);
              // Proceeding anyway, but this might indicate a prompt/model issue
         }
 
@@ -205,8 +247,8 @@ Please provide the analysis in the specified JSON format.`;
                     }
                 }
                 parsedFallback.counterArguments = filteredCountersFallback;
-                if (Object.keys(parsedFallback.counterArguments).length !== 5) {
-                    console.warn(`Fallback: Expected 5 counter arguments after filtering, but got ${Object.keys(parsedFallback.counterArguments).length}. Primary: ${primaryFallback}`, parsedFallback.counterArguments);
+                if (Object.keys(parsedFallback.counterArguments).length !== 9) {
+                    console.warn(`Fallback: Expected 9 counter arguments after filtering, but got ${Object.keys(parsedFallback.counterArguments).length}. Primary: ${primaryFallback}`, parsedFallback.counterArguments);
                 }
                 return parsedFallback;
             } catch (fallbackParseError) {

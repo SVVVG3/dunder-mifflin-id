@@ -1,34 +1,34 @@
 {
   "accountAssociation": {
     "header": "eyJmaWQiOjQ2NjExMSwidHlwZSI6ImN1c3RvZHkiLCJrZXkiOiIweDQ0ZDRjNThlZmNCYjQ0NjM5RDY0NDIwMTc1Q2Y1MTlhQTMxOTFhODYifQ",
-    "payload": "eyJkb21haW4iOiJ3aGljaC1zb3ByYW5vLWFyZS15b3UudmVyY2VsLmFwcCJ9",
+    "payload": "eyJkb21haW4iOiI4YTA4ZDJkYTM0MGQubmdyb2stZnJlZS5hcHAifQ",
     "signature": "MHhjZTRlMDlmNmJmODEyYTYxYTlkNzI4NDVjMDBkY2U4NDczYTJmZWJiYmM1Zjc0ODkyMjhjZTUwNmU0MjczMjdlNmVmN2JlYzExOTdjZDBhYzllYWNhMDFiYmI4ZGRjZDBjNmQwYjdlNmU5N2Q2ZmQ4ODVlN2ZjYjk5NDU4MDA0MDFi"
   },
-  "miniapp": {
-    "version": "next",
-    "name": "Which Soprano Are You?",
-    "iconUrl": "https://which-soprano-are-you.vercel.app/soprano-icon.png",
-    "homeUrl": "https://which-soprano-are-you.vercel.app",
-    "imageUrl": "https://which-soprano-are-you.vercel.app/soprano-embed.png?v=2",
-    "buttonTitle": "Give me the Gabagool",
-    "subtitle": "Which Soprano are you?",
-    "description": "Analyze your personality and casts to find out which Soprano you most resemble.",
+  "frame": {
+    "version": "1",
+    "name": "Dunder Mifflin ID",
+    "iconUrl": "https://8a08d2da340d.ngrok-free.app/office-icon.png",
+    "homeUrl": "https://8a08d2da340d.ngrok-free.app",
+    "imageUrl": "https://8a08d2da340d.ngrok-free.app/office-embed.png?v=5",
+    "buttonTitle": "Where's my ID?",
+    "subtitle": "Who in The Office are you?",
+    "description": "Analyze your personality and casts to find out which Office character you most resemble.",
     "primaryCategory": "entertainment",
-    "webhookUrl": "https://api.neynar.com/f/app/3a0f9184-d387-428a-ae89-6ea71a2f067f/event",
-    "splashImageUrl": "https://which-soprano-are-you.vercel.app/soprano-icon.png?v=2",
-    "splashBackgroundColor": "#0a0a0a",
-    "tagline": "Which Soprano are you?",
-    "heroImageUrl": "https://which-soprano-are-you.vercel.app/soprano-embed.png?v=2",
+    "webhookUrl": "https://api.neynar.com/f/app/d4c19692-d0ff-4306-b980-1c2eaf32fac8/event",
+    "splashImageUrl": "https://8a08d2da340d.ngrok-free.app/office-icon.png?v=5",
+    "splashBackgroundColor": "#012f85",
+    "tagline": "Who in The Office are you?",
+    "heroImageUrl": "https://8a08d2da340d.ngrok-free.app/office-embed.png?v=5",
     "tags": [
       "personality",
       "quiz",
-      "sopranos",
+      "office",
       "entertainment",
       "ai-analysis"
     ],
-    "castShareUrl": "https://which-soprano-are-you.vercel.app",
-    "ogTitle": "Which Soprano Are You?",
-    "ogDescription": "Analyze your personality and casts to find out which Soprano you most resemble.",
-    "ogImageUrl": "https://which-soprano-are-you.vercel.app/soprano-embed.png?v=2"
+    "castShareUrl": "https://8a08d2da340d.ngrok-free.app",
+    "ogTitle": "Dunder Mifflin ID",
+    "ogDescription": "Analyze your personality and casts to find out which Office character you most resemble.",
+    "ogImageUrl": "https://8a08d2da340d.ngrok-free.app/office-embed.png?v=5"
   }
 }
