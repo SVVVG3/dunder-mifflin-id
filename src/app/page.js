@@ -25,17 +25,18 @@ export async function generateMetadata({ searchParams }) {
     title: 'Dunder Mifflin ID',
     description: 'Discover which character from The Office you most resemble based on your personality!',
     other: {
-      'fc:miniapp': JSON.stringify({
-        version: "1", // Correct Mini App version format
-        imageUrl: dynamicImageUrl, // 3:2 aspect ratio image
+      'fc:frame': JSON.stringify({
+        version: "1",
+        name: "Dunder Mifflin ID", // This will fix the "Vercel" title issue
+        imageUrl: dynamicImageUrl,
         button: {
-          title: "Where's my ID?", // Max 32 characters
+          title: "Where's my ID?",
           action: {
             type: "launch_frame",
             name: "Dunder Mifflin ID",
             url: appUrl,
-            splashImageUrl: `${appUrl}/office-icon.png?v=5`, // 200x200px custom icon
-            splashBackgroundColor: "#012f85" // Dark theme background
+            splashImageUrl: `${appUrl}/office-icon.png?v=5`,
+            splashBackgroundColor: "#012f85"
           }
         }
       })

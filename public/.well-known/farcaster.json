@@ -7,28 +7,32 @@
   "frame": {
     "version": "1",
     "name": "Dunder Mifflin ID",
-    "iconUrl": "https://dunder-mifflin-id.vercel.app/office-icon.png",
+    "iconUrl": "https://dunder-mifflin-id.vercel.app/office-icon.png?v=6",
     "homeUrl": "https://dunder-mifflin-id.vercel.app",
-    "imageUrl": "https://dunder-mifflin-id.vercel.app/office-embed.png?v=5",
+    "imageUrl": "https://dunder-mifflin-id.vercel.app/office-embed.png?v=6",
     "buttonTitle": "Where's my ID?",
     "subtitle": "Who's your Office mentor?",
     "description": "Analyze your personality and casts to find out which Office character is your mentor.",
     "primaryCategory": "entertainment",
     "webhookUrl": "https://api.neynar.com/f/app/d4c19692-d0ff-4306-b980-1c2eaf32fac8/event",
-    "splashImageUrl": "https://dunder-mifflin-id.vercel.app/office-icon.png?v=5",
+    "splashImageUrl": "https://dunder-mifflin-id.vercel.app/office-icon.png?v=6",
     "splashBackgroundColor": "#012f85",
     "tagline": "Who's your Office mentor?",
-    "heroImageUrl": "https://dunder-mifflin-id.vercel.app/office-embed.png?v=5",
+    "heroImageUrl": "https://dunder-mifflin-id.vercel.app/office-embed.png?v=6",
+    "screenshotUrls": [
+      "https://dunder-mifflin-id.vercel.app/office-embed.png?v=6"
+    ],
     "tags": [
       "personality",
       "quiz",
       "office",
       "entertainment",
-      "ai-analysis"
+      "ai-analysis",
+      "dunder-mifflin"
     ],
     "castShareUrl": "https://dunder-mifflin-id.vercel.app",
     "ogTitle": "Dunder Mifflin ID",
     "ogDescription": "Analyze your personality and casts to find out which Office character is your mentor.",
-    "ogImageUrl": "https://dunder-mifflin-id.vercel.app/office-embed.png?v=5"
+    "ogImageUrl": "https://dunder-mifflin-id.vercel.app/office-embed.png?v=6"
   }
 }
