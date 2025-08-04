@@ -1,8 +1,8 @@
 {
   "accountAssociation": {
-    "header": "eyJmaWQiOjQ2NjExMSwidHlwZSI6ImN1c3RvZHkiLCJrZXkiOiIweDQ0ZDRjNThlZmNCYjQ0NjM5RDY0NDIwMTc1Q2Y1MTlhQTMxOTFhODYifQ",
+    "header": "eyJmaWQiOjQ2NjExMSwidHlwZSI6ImF1dGgiLCJrZXkiOiIweEJiMTRkQjlmNjBlODA2ODQ2MzM1Zjc5NDgxRDk5OGFiYzY2RWZDMjAifQ",
     "payload": "eyJkb21haW4iOiJkdW5kZXItbWlmZmxpbi1pZC52ZXJjZWwuYXBwIn0",
-    "signature": "MHhjZTRlMDlmNmJmODEyYTYxYTlkNzI4NDVjMDBkY2U4NDczYTJmZWJiYmM1Zjc0ODkyMjhjZTUwNmU0MjczMjdlNmVmN2JlYzExOTdjZDBhYzllYWNhMDFiYmI4ZGRjZDBjNmQwYjdlNmU5N2Q2ZmQ4ODVlN2ZjYjk5NDU4MDA0MDFi"
+    "signature": "7WoOG3vWwdReEQdF3F047ZfI6sd8kCZihZH+jOd9deVR5Wu42SZYovMigPpU8dGf2E54emZ9+JvwWOFlyD2kzBw="
   },
   "frame": {
     "version": "1",
@@ -11,13 +11,13 @@
     "homeUrl": "https://dunder-mifflin-id.vercel.app",
     "imageUrl": "https://dunder-mifflin-id.vercel.app/office-embed.png?v=5",
     "buttonTitle": "Where's my ID?",
-    "subtitle": "Who in The Office are you?",
-    "description": "Analyze your personality and casts to find out which Office character you most resemble.",
+    "subtitle": "Who's your Office mentor?",
+    "description": "Analyze your personality and casts to find out which Office character is your mentor.",
     "primaryCategory": "entertainment",
     "webhookUrl": "https://api.neynar.com/f/app/d4c19692-d0ff-4306-b980-1c2eaf32fac8/event",
     "splashImageUrl": "https://dunder-mifflin-id.vercel.app/office-icon.png?v=5",
     "splashBackgroundColor": "#012f85",
-    "tagline": "Who in The Office are you?",
+    "tagline": "Who's your Office mentor?",
     "heroImageUrl": "https://dunder-mifflin-id.vercel.app/office-embed.png?v=5",
     "tags": [
       "personality",
@@ -28,7 +28,7 @@
     ],
     "castShareUrl": "https://dunder-mifflin-id.vercel.app",
     "ogTitle": "Dunder Mifflin ID",
-    "ogDescription": "Analyze your personality and casts to find out which Office character you most resemble.",
+    "ogDescription": "Analyze your personality and casts to find out which Office character is your mentor.",
     "ogImageUrl": "https://dunder-mifflin-id.vercel.app/office-embed.png?v=5"
   }
 }
