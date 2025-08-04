@@ -1,24 +1,24 @@
 {
   "accountAssociation": {
     "header": "eyJmaWQiOjQ2NjExMSwidHlwZSI6ImN1c3RvZHkiLCJrZXkiOiIweDQ0ZDRjNThlZmNCYjQ0NjM5RDY0NDIwMTc1Q2Y1MTlhQTMxOTFhODYifQ",
-    "payload": "eyJkb21haW4iOiI4YTA4ZDJkYTM0MGQubmdyb2stZnJlZS5hcHAifQ",
+    "payload": "eyJkb21haW4iOiJkdW5kZXItbWlmZmxpbi1pZC52ZXJjZWwuYXBwIn0",
     "signature": "MHhjZTRlMDlmNmJmODEyYTYxYTlkNzI4NDVjMDBkY2U4NDczYTJmZWJiYmM1Zjc0ODkyMjhjZTUwNmU0MjczMjdlNmVmN2JlYzExOTdjZDBhYzllYWNhMDFiYmI4ZGRjZDBjNmQwYjdlNmU5N2Q2ZmQ4ODVlN2ZjYjk5NDU4MDA0MDFi"
   },
   "frame": {
     "version": "1",
     "name": "Dunder Mifflin ID",
-    "iconUrl": "https://8a08d2da340d.ngrok-free.app/office-icon.png",
-    "homeUrl": "https://8a08d2da340d.ngrok-free.app",
-    "imageUrl": "https://8a08d2da340d.ngrok-free.app/office-embed.png?v=5",
+    "iconUrl": "https://dunder-mifflin-id.vercel.app/office-icon.png",
+    "homeUrl": "https://dunder-mifflin-id.vercel.app",
+    "imageUrl": "https://dunder-mifflin-id.vercel.app/office-embed.png?v=5",
     "buttonTitle": "Where's my ID?",
     "subtitle": "Who in The Office are you?",
     "description": "Analyze your personality and casts to find out which Office character you most resemble.",
     "primaryCategory": "entertainment",
     "webhookUrl": "https://api.neynar.com/f/app/d4c19692-d0ff-4306-b980-1c2eaf32fac8/event",
-    "splashImageUrl": "https://8a08d2da340d.ngrok-free.app/office-icon.png?v=5",
+    "splashImageUrl": "https://dunder-mifflin-id.vercel.app/office-icon.png?v=5",
     "splashBackgroundColor": "#012f85",
     "tagline": "Who in The Office are you?",
-    "heroImageUrl": "https://8a08d2da340d.ngrok-free.app/office-embed.png?v=5",
+    "heroImageUrl": "https://dunder-mifflin-id.vercel.app/office-embed.png?v=5",
     "tags": [
       "personality",
       "quiz",
@@ -26,9 +26,9 @@
       "entertainment",
       "ai-analysis"
     ],
-    "castShareUrl": "https://8a08d2da340d.ngrok-free.app",
+    "castShareUrl": "https://dunder-mifflin-id.vercel.app",
     "ogTitle": "Dunder Mifflin ID",
     "ogDescription": "Analyze your personality and casts to find out which Office character you most resemble.",
-    "ogImageUrl": "https://8a08d2da340d.ngrok-free.app/office-embed.png?v=5"
+    "ogImageUrl": "https://dunder-mifflin-id.vercel.app/office-embed.png?v=5"
   }
 }

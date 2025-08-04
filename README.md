@@ -224,21 +224,11 @@ forge test --match-test testMintEmployeeID
 - Check meta tags are properly set
 - Allow 5-10 minutes for Farcaster cache to update
 
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## 🙏 Acknowledgments
 
 - **The Office** for endless entertainment and memorable characters
+- **@jc4p** for the starter template
 - **Farcaster** for the decentralized social protocol
 - **Base** for affordable blockchain transactions
 - **OpenZeppelin** for secure smart contract primitives
@@ -247,9 +237,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 📞 Support
 
 For support or questions:
-- Open an issue on GitHub
-- Reach out on Farcaster: [@your-farcaster-handle]
-- Join our community discussions
+- Reach out on Farcaster: @svvvg3.eth
 
 ---
 

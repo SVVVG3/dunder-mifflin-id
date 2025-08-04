@@ -1,7 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Allow ngrok and other dev origins
-  allowedDevOrigins: ['8a08d2da340d.ngrok-free.app'],
+  // Production config - no dev origins needed
   
   async headers() {
     return [
@@ -17,7 +16,7 @@ const nextConfig = {
       },
       {
         // Special cache control for embed images that change frequently  
-        source: '/(soprano-embed|soprano-icon)\\.png',
+        source: '/(office-embed|office-icon)\\.png',
         headers: [
           {
             key: 'Cache-Control',
