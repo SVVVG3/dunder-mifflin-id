@@ -32,7 +32,7 @@ export async function generateMetadata({ searchParams }) {
           title: "Where's my ID?", // Max 32 characters
           action: {
             type: "launch_frame",
-            name: "Who's your Office mentor?",
+            name: "Dunder Mifflin ID",
             url: appUrl,
             splashImageUrl: `${appUrl}/office-icon.png?v=5`, // 200x200px custom icon
             splashBackgroundColor: "#012f85" // Dark theme background
