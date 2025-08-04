@@ -110,7 +110,7 @@ export async function analyzeOfficeCharacter(bio, casts) {
   }
 
   const model = genAI.getGenerativeModel({
-    model: "gemini-2.5-flash",
+    model: "gemini-1.5-flash",
     generationConfig: {
       temperature: 0.7,
       topK: 40,
@@ -194,6 +194,14 @@ Please provide the analysis in the specified JSON format.`;
     const responseText = response.text();
 
     console.log("Received Gemini response text.");
+    console.log("Response length:", responseText?.length || 0);
+    console.log("First 200 chars:", responseText?.substring(0, 200) || 'EMPTY');
+
+    // Check if response is empty or too short
+    if (!responseText || responseText.trim().length < 10) {
+        console.error("Gemini response is empty or too short:", responseText);
+        throw new Error("Empty or invalid response from Gemini API.");
+    }
 
     // Attempt to parse the JSON response
     try {
