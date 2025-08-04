@@ -146,7 +146,7 @@ export function HomeComponent() {
     query: { enabled: !!address }
   });
 
-  const { data: usdcAllowance } = useReadContract({
+  const { data: usdcAllowance, refetch: refetchAllowance } = useReadContract({
     address: USDC_ADDRESS,
     abi: USDC_CONTRACT_ABI,
     functionName: 'allowance',
@@ -171,23 +171,60 @@ export function HomeComponent() {
     } else if (isApproveTxLoading) {
       setMintStatus('⏳ Waiting for USDC approval confirmation...');
     } else if (isApproveTxSuccess && mintStep === 'approving' && mintData) {
-      console.log('✅ Approval successful, automatically proceeding to mint...');
-      setMintStatus('🎯 USDC approved! Now minting your ID...');
-      setMintStep('minting');
+      console.log('✅ Approval successful, waiting for blockchain state update...');
+      setMintStatus('⏳ USDC approved! Waiting for blockchain sync...');
       
-      // Automatically trigger mint with stored data
-      writeContract({
-        address: contractAddress,
-        abi: NFT_CONTRACT_ABI,
-        functionName: 'mintEmployeeID',
-        args: [
-          mintData.character, 
-          mintData.displayName, 
-          mintData.analysisText, 
-          BigInt(mintData.fid), 
-          mintData.metadataUrl
-        ],
-      });
+      // CRITICAL FIX: Add delay + refetch allowance to prevent race condition
+      // Wait 3 seconds for blockchain state to fully update before minting
+      setTimeout(async () => {
+        console.log('🎯 Blockchain synced, refetching allowance...');
+        setMintStatus('🔄 Verifying USDC approval...');
+        
+        try {
+          // Refetch allowance to ensure we have latest blockchain state
+          await refetchAllowance();
+          
+          console.log('✅ Allowance refreshed, now minting...');
+          setMintStatus('🎯 USDC approved! Now minting your ID...');
+          setMintStep('minting');
+          
+          // Automatically trigger mint with stored data
+          writeContract({
+            address: contractAddress,
+            abi: NFT_CONTRACT_ABI,
+            functionName: 'mintEmployeeID',
+            args: [
+              mintData.character, 
+              mintData.displayName, 
+              mintData.analysisText, 
+              BigInt(mintData.fid), 
+              mintData.metadataUrl
+            ],
+          });
+        } catch (error) {
+          console.error('❌ Failed to refetch allowance:', error);
+          setMintStatus('🔄 Retrying in 2 seconds...');
+          
+          // Fallback: try one more time after 2 seconds
+          setTimeout(() => {
+            setMintStatus('🎯 Now minting your ID...');
+            setMintStep('minting');
+            writeContract({
+              address: contractAddress,
+              abi: NFT_CONTRACT_ABI,
+              functionName: 'mintEmployeeID',
+              args: [
+                mintData.character, 
+                mintData.displayName, 
+                mintData.analysisText, 
+                BigInt(mintData.fid), 
+                mintData.metadataUrl
+              ],
+            });
+          }, 2000);
+        }
+      }, 3000); // 3 second delay to prevent race condition
+      
     } else if (approveError) {
       console.error('Approval error:', approveError);
       setMintStatus(`❌ USDC approval failed: ${approveError.message}`);
@@ -195,7 +232,7 @@ export function HomeComponent() {
       setMintData(null);
       setTimeout(() => setMintStatus(''), 8000);
     }
-  }, [isApprovePending, isApproveTxLoading, isApproveTxSuccess, approveError, mintStep, mintData, writeContract, contractAddress]);
+  }, [isApprovePending, isApproveTxLoading, isApproveTxSuccess, approveError, mintStep, mintData, writeContract, contractAddress, refetchAllowance]);
 
   // Handle mint transaction status
   useEffect(() => {
@@ -220,12 +257,38 @@ export function HomeComponent() {
       setTimeout(() => setMintStatus(''), 25000);
     } else if (mintError && mintStep === 'minting') {
       console.error('Mint error:', mintError);
-      setMintStatus(`❌ Mint failed: ${mintError.message}`);
-      setMintStep('idle');
-      setMintData(null);
-      setTimeout(() => setMintStatus(''), 8000);
+      
+      // Check if it's an allowance error
+      if (mintError.message?.includes('transfer amount exceeds allowance') || 
+          mintError.message?.includes('ERC20: transfer amount exceeds allowance')) {
+        setMintStatus('🔄 Allowance issue detected. Please try minting again in 10 seconds...');
+        console.log('🔄 Allowance race condition detected, will auto-retry');
+        // Auto-retry after 10 seconds
+        setTimeout(() => {
+          if (mintData) {
+            setMintStatus('🔄 Auto-retrying mint...');
+            writeContract({
+              address: contractAddress,
+              abi: NFT_CONTRACT_ABI,
+              functionName: 'mintEmployeeID',
+              args: [
+                mintData.character, 
+                mintData.displayName, 
+                mintData.analysisText, 
+                BigInt(mintData.fid), 
+                mintData.metadataUrl
+              ],
+            });
+          }
+        }, 10000);
+      } else {
+        setMintStatus(`❌ Mint failed: ${mintError.message}`);
+        setMintStep('idle');
+        setMintData(null);
+        setTimeout(() => setMintStatus(''), 8000);
+      }
     }
-  }, [isMintPending, isMintTxLoading, isMintTxSuccess, mintTxHash, mintError, mintStep, mintData, officeData, userData]);
+  }, [isMintPending, isMintTxLoading, isMintTxSuccess, mintTxHash, mintError, mintStep, mintData, officeData, userData, writeContract, contractAddress]);
 
 
   // Effect to initialize SDK and get context
