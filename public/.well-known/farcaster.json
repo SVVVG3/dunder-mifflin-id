@@ -27,8 +27,7 @@
       "quiz",
       "office",
       "entertainment",
-      "ai-analysis",
-      "dunder-mifflin"
+      "ai-analysis"
     ],
     "castShareUrl": "https://dunder-mifflin-id.vercel.app",
     "ogTitle": "Dunder Mifflin ID",
