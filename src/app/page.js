@@ -32,7 +32,7 @@ export async function generateMetadata({ searchParams }) {
         button: {
           title: "Where's my ID?",
           action: {
-            type: "launch_frame",
+            type: "launch_miniapp",
             name: "Dunder Mifflin ID",
             url: appUrl,
             splashImageUrl: `${appUrl}/office-icon.png?v=5`,

@@ -4,7 +4,7 @@
     "payload": "eyJkb21haW4iOiJkdW5kZXItbWlmZmxpbi1pZC52ZXJjZWwuYXBwIn0",
     "signature": "7WoOG3vWwdReEQdF3F047ZfI6sd8kCZihZH+jOd9deVR5Wu42SZYovMigPpU8dGf2E54emZ9+JvwWOFlyD2kzBw="
   },
-  "frame": {
+  "miniapp": {
     "version": "1",
     "name": "Dunder Mifflin ID",
     "iconUrl": "https://dunder-mifflin-id.vercel.app/office-icon.png?v=6",
